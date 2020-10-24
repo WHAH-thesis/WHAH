@@ -21,5 +21,8 @@ export class FeedComponent implements OnInit {
     this.local.onePost = post; 
     this.router.navigateByUrl('/post');
   }
-
+ rateMe(num, id){
+   console.log("aaa")
+   console.log(num, id)
+ }
 }

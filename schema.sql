@@ -67,6 +67,8 @@ CREATE TABLE trainingCenters(
     verRequest VARCHAR (10)   DEFAULT 'false' , 
     firstTime VARCHAR (10)   DEFAULT 'true',
     numberOfPosts INTEGER(50) ,
+    memberShip VARCHAR (10)   DEFAULT 'silver',
+    numberOfPostsAvaible INTEGER(10) DEFAULT 3 , 
     token varchar (300) 
 
 );
@@ -80,5 +82,12 @@ CREATE TABLE post(
     rate INTEGER(10)  ,
     salary INTEGER(50)   DEFAULT 1, 
     contact VARCHAR(50) ,
-   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   numberOfLikes INTEGER(50) NOT NULL DEFAULT(0)
+);
+CREATE TABLE notification (
+ id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(50) ,
+   owner VARCHAR(50) ,
+   studentName VARCHAR(50)
 );

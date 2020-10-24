@@ -27,10 +27,15 @@ import { PostComponent } from './post/post.component';
 import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { TrainingCenterEditComponent } from './training-center-edit/training-center-edit.component';
 import { PostComapnyComponent } from './post-comapny/post-comapny.component';
+ 
+import { TcPostsComponent } from './tc-posts/tc-posts.component';
+import { ModifyPostTcComponent } from './modify-post-tc/modify-post-tc.component';
 import { PostsCompanyProfileComponent } from './posts-company-profile/posts-company-profile.component'
 import { UpdateCompanyPostsComponent } from './update-company-posts/update-company-posts.component'
-import { TcPostsComponent } from './tc-posts/tc-posts.component';
 import { BanUsersComponent } from './ban-users/ban-users.component';
+import { StudentFeedComponent } from './student-feed/student-feed.component';
+import { NotificationComponent } from './notification/notification.component';
+import { AdminWeeklyUpdateComponent } from './admin-weekly-update/admin-weekly-update.component';
 
 const routes: Routes = [
   { path: 'register/student', component: VerficationComponent },
@@ -60,12 +65,17 @@ const routes: Routes = [
   { path : 'admin/delete' , component : AdminPostsComponent},
   { path: 'editTc', component : TrainingCenterEditComponent},
   { path: 'post/company', component : PostComapnyComponent},
+  { path: 'post/center', component: PostCenterComponent },
+  { path: 'own/posts', component : TcPostsComponent},
+  { path: 'modify/tc/posts', component : ModifyPostTcComponent},
   { path : 'companyOwnPost', component: PostsCompanyProfileComponent},
-  { path : 'updateCompPost', component: UpdateCompanyPostsComponent}
+  { path : 'updateCompPost', component: UpdateCompanyPostsComponent},
   { path: 'post/center', component: PostCenterComponent },
   { path: 'own/posts', component: TcPostsComponent },
-  { path: 'admin/ban', component : BanUsersComponent}
-
+  { path: 'admin/ban', component : BanUsersComponent},
+  { path: 'feed/student', component : StudentFeedComponent},
+  { path: 'notification', component : NotificationComponent},
+  { path: 'admin/update', component : AdminWeeklyUpdateComponent}
 
 ];
 

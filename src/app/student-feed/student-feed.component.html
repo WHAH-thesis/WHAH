@@ -1,0 +1,31 @@
+<p>student offert</p>
+<div class="companies-container">
+  <div class="card" style="width: 18rem" *ngFor="let element of posts">
+    <img
+      class="card-img-top"
+      src="{{ this.element?.image }}"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ this.element?.title }}</h5>
+      <p class="card-text">{{ this.element?.description }}</p>
+      <p>click :</p>
+      <div class="rating">
+        <h4 (click)= "rateMe((this.element?.id))"> ☆</h4>
+      </div>
+      <h5>number of stars :  {{this.element?.numberOfLikes}}</h5>
+      <a class="btn btn-primary" (click)="seeMore(this.element)">See more</a>
+      <a
+        class="btn btn-primary"
+        (click)="
+          apply({
+            title: this.element.title,
+            owner: this.element.owner,
+            studentName: this.local.message
+          })
+        "
+        >apply</a
+      >
+    </div>
+  </div>
+</div>

@@ -629,12 +629,24 @@ app.post("/api/company/Update", (req, res) => {
   });
 });
 
+var sortPosts = (a, b) => {
+  if ( a.numberOfLikes < b.numberOfLikes ){
+    return -1;
+  }
+  if ( a.numberOfLikes > b.numberOfLikes ){
+    return 1;
+  }
+  return 0;
+}
+
 app.get("/api/posts", (req, res) => {
   db.getPosts((err, data) => {
     if (err) throw err;
-    res.send(data);
+    res.send(data.sort(sortPosts));
   });
 });
+
+
 app.post("/api/posts/addPost", (req, res) => {
   var array = [
     req.body.title,
@@ -646,10 +658,19 @@ app.post("/api/posts/addPost", (req, res) => {
     req.body.salary,
     req.body.contact,
   ];
+  var array2 = [
+    req.body.newNumberOfPosts,
+    req.body.idCenter
+  ]
+
   db.addPost(array, (err, data) => {
-    err ? console.log(err) : res.send(data);
+    err ? console.log(err) : db.updateNumberOfPosts(array2, (err, data) => {
+      err ? console.log(err) : res.send(data)
+    })
   });
 });
+ 
+
 
 app.post("/api/posts/delete", (req, res) => {
   var array = [
@@ -688,6 +709,7 @@ app.post('/api/center/update', (req, res)=>{
     err? console.log(err) :console.log(data)
   })
 })
+
 
 //get the company posts by the owner name
 
@@ -732,6 +754,25 @@ app.post("/api/users/postsTc", (req, res) => {
     res.send(data);
   });
 });
+app.post('/api/update',(req,res)=>{
+ var arr=req.body;
+ var obj1=arr[0];
+ var obj2=arr[1];
+var arr1=Object.values(obj1)
+var arr2=Object.values(obj2)
+console.log(arr1,arr2)
+for(var i=0;i<arr1.length;i++){
+  if(!arr1[i]){
+    arr1[i]=arr2[i];
+  }
+  
+}
+console.log (arr1);
+db.updatePost(arr1, (err, data) => {
+  err ? console.log(err) : res.send(data);
+});
+ 
+})
 
 app.post("/api/posts/deleteTc", (req, res) => {
   var array = [
@@ -789,7 +830,82 @@ app.post("/api/users/ban/training", (req, res) => {
     err ? console.log(err) : res.send(data);
   });
 }); 
+app.post("/api/student/apply",(req,res)=>{
+  var arr =Object.values(req.body);
+  db.StApply(arr,(err,data)=>{
+    err?console.log(err):res.send(data);
+  })
+})
+app.post('/api/getNotification',(req,res)=>{
+  var arr = [req.body.owner]
+  db.getStudentApplication( arr, (err,data)=>{
+    if (err) throw err;
+    res.send(data);
+  })})
+  app.post('/api/deleteApply',(req,res)=>{
+    db.deleteApp( req.body.id, (err, data)=>{
+      err? console.log(err) :res.send(data) 
+    })
+   
+  })
+  app.post('/api/acceptapply',(req,res)=>{
+    db.acceptApp( req.body.id, (err, data)=>{
+      err? console.log(err) :res.send(data) 
+    })
+   
+  })
+  
 
+app.post("/api/users/numberOfPosts", (req, res) => {
+  var id = req.body.id
+  db.getCenterNumberOfPostsAvailble(id, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+
+app.get("/api/posts/weeklyPosts/siver", (req, res) => {
+  db.weeklydataSilver((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.get("/api/posts/weeklyPosts/gold", (req, res) => {
+  db.weeklydataGold((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.get("/api/posts/weeklyPosts/plat", (req, res) => {
+  db.weeklydataPlat((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.post("/api/users/PlatMembership", (req, res) => {
+  var name = [req.body.name]
+  db.changeMembershipToPlat(name, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.post("/api/users/GoldMembership", (req, res) => {
+  var name = [req.body.name]
+  db.changeMembershipToGold(name, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+//increment numberOfLikes inside post
+app.post('/api/stu/rating', (req, res)=>{
+  console.log(req.body)
+  db.incrementLikes(req.body.id,(err, data)=>{
+    err ? console.log(err) : console.log(data);
+  })
+})
 
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
