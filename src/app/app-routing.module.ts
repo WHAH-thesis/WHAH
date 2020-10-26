@@ -27,7 +27,6 @@ import { PostComponent } from "./post/post.component";
 import { AdminPostsComponent } from "./admin-posts/admin-posts.component";
 import { TrainingCenterEditComponent } from "./training-center-edit/training-center-edit.component";
 import { PostComapnyComponent } from "./post-comapny/post-comapny.component";
-
 import { TcPostsComponent } from "./tc-posts/tc-posts.component";
 import { ModifyPostTcComponent } from "./modify-post-tc/modify-post-tc.component";
 import { PostsCompanyProfileComponent } from "./posts-company-profile/posts-company-profile.component";
@@ -37,6 +36,10 @@ import { StudentFeedComponent } from "./student-feed/student-feed.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { AdminWeeklyUpdateComponent } from "./admin-weekly-update/admin-weekly-update.component";
 import { LoginAdminComponent } from "./login-admin/login-admin.component";
+import { ReportsToAdminComponent } from "./reports-to-admin/reports-to-admin.component";
+import { AdminReportComponent } from "./admin-report/admin-report.component";
+import { ReportComponent } from "./report/report.component";
+import { AdminReportsComponent } from "./admin-reports/admin-reports.component";
 
 const routes: Routes = [
   { path: "register/student", component: VerficationComponent },
@@ -87,6 +90,10 @@ const routes: Routes = [
   { path: "notification", component: NotificationComponent },
   { path: "admin/update", component: AdminWeeklyUpdateComponent },
   { path: "admin/login", component: LoginAdminComponent },
+  { path: "sendReport", component: ReportsToAdminComponent },
+  { path: "AdminReport", component: AdminReportComponent },
+  { path: "report/post", component: ReportComponent },
+  { path: "report/admin", component: AdminReportsComponent },
 ];
 
 @NgModule({

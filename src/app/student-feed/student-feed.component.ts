@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { LocalService } from '../local.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { HttpService } from "../http.service";
+import { LocalService } from "../local.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-student-feed',
-  templateUrl: './student-feed.component.html',
-  styleUrls: ['./student-feed.component.css'],
+  selector: "app-student-feed",
+  templateUrl: "./student-feed.component.html",
+  styleUrls: ["./student-feed.component.css"],
 })
 export class StudentFeedComponent implements OnInit {
   posts: any;
@@ -18,21 +18,28 @@ export class StudentFeedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.local.message)
+    // get all the posts
     this._http.httpGetPosts().subscribe((data) => {
-      console.log('data yohooo ===> ', data);
       this.posts = data;
     });
   }
 
-  apply(obj){
-    this._http.applystudent(obj).subscribe(data=>{
-      alert("Dear Student , your application is saved , we'll conatct you as soon as possible");
-      this.router.navigateByUrl('/studentProfile');
-    })
+  apply(obj) {
+    // apply for post
+    this._http.applystudent(obj).subscribe((data) => {
+      alert(
+        "Dear Student , your application is saved , we'll conatct you as soon as possible"
+      );
+      this.router.navigateByUrl("/studentProfile");
+    });
   }
+  // see the all the post
   seeMore(post) {
     this.local.onePost = post;
-    this.router.navigateByUrl('/post');
+    this.router.navigateByUrl("/post");
+  }
+  report(post) {
+    this.local.reported = post;
+    this.router.navigateByUrl("report/post");
   }
 }
