@@ -198,7 +198,7 @@ app.post("/api/users/rejectCenter", (req, res) => {
     res.send(data);
   });
 });
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////GET NON VERIFIED USERS///////////////////////////////////////////
 
 app.get("/api/users/getNonVerifiedStudents", async (req, res) => {
   try {
@@ -226,7 +226,7 @@ app.get("/api/users/getNonVerifiedCenters", async (req, res) => {
     console.error(err);
   }
 });
-
+//////////////// GET USER STATE ////////////
 app.post("/api/users/getUsersatate", (req, res) => {
   console.log(req.body);
   db.getUserStatus(req.body.username, (err, data) => {
@@ -251,6 +251,8 @@ app.post("/api/users/getCentersatate", (req, res) => {
   });
 });
 
+
+// SIGN UP STUDENT
 app.post("/addStudents", (req, res) => {
   console.log(req.body);
   var arr = [
@@ -266,10 +268,10 @@ app.post("/addStudents", (req, res) => {
   });
 });
 
+// LOG IN 
 app.post("/login", (req, res) => {
   db.getUserInfo(req.body.username, (err, data) => {
-    if (err) throw err;
-
+    if (err) throw res.send("error");
     console.log(data[0].password);
     var boolean = bcrypt.compareSync(req.body.password, data[0].password);
     var obj = {
@@ -289,7 +291,6 @@ app.post("/login", (req, res) => {
             err ? console.log(err) : res.status(200).json({ token: token });
             db.saveUserToken(req.body.username, token, (err, data) => {
               if (err) throw err;
-              console.log("token saved");
             });
           }
         )
@@ -369,7 +370,7 @@ app.post("/loginTC", (req, res) => {
       : res.send({ err });
   });
 });
-
+////////////////// ADD TOKENS TO DATABASE //////////////
 app.post("/api/users/studentToken", (req, res) => {
   db.selectUserByToken(req.body.token, (err, data) => {
     if (err) throw err;
@@ -629,24 +630,12 @@ app.post("/api/company/Update", (req, res) => {
   });
 });
 
-var sortPosts = (a, b) => {
-  if ( a.numberOfLikes < b.numberOfLikes ){
-    return -1;
-  }
-  if ( a.numberOfLikes > b.numberOfLikes ){
-    return 1;
-  }
-  return 0;
-}
-
 app.get("/api/posts", (req, res) => {
   db.getPosts((err, data) => {
     if (err) throw err;
-    res.send(data.sort(sortPosts));
+    res.send(data);
   });
 });
-
-
 app.post("/api/posts/addPost", (req, res) => {
   var array = [
     req.body.title,
@@ -899,10 +888,39 @@ app.post("/api/users/GoldMembership", (req, res) => {
   });
 }); 
 
-//increment numberOfLikes inside post
-app.post('/api/stu/rating', (req, res)=>{
-  console.log(req.body)
-  db.incrementLikes(req.body.id,(err, data)=>{
+//save users report to db
+
+app.post('/api/users/Reports', (req, res) => {
+  let obj = req.body
+  for(var key in obj){
+    if(!obj[key]){
+       obj[key] = "anonymous"
+    }
+  }
+  console.log(obj)
+  db.userReports(Object.values(obj), (err, data) => {
+    err ? console.log(err) : console.log(data);
+  });
+})
+
+//get the reports for the admin
+app.get('/api/admin/getReports',(req, res) =>{
+  db.getReports( (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+})
+
+//delete one report for the admin
+app.post('/api/admin/delReports', (req, res)=>{
+  console.log(req.body.id)
+  db.delOneReport(req.body.id, (err, data) => {
+    err ? console.log(err) : console.log(data);
+  });
+}) 
+
+//delete all report for the admin
+app.delete('/api/admin/delAllReports', (req, res)=>{
+  db.delAllReports((err, data) => {
     err ? console.log(err) : console.log(data);
   })
 })

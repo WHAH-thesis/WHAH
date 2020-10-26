@@ -9,11 +9,9 @@
     <div class="card-body">
       <h5 class="card-title">{{ this.element?.title }}</h5>
       <p class="card-text">{{ this.element?.description }}</p>
-      <p>click :</p>
       <div class="rating">
-        <h4 (click)= "rateMe((this.element?.id))"> ☆</h4>
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
       </div>
-      <h5>number of stars :  {{this.element?.numberOfLikes}}</h5>
       <a class="btn btn-primary" (click)="seeMore(this.element)">See more</a>
       <a
         class="btn btn-primary"

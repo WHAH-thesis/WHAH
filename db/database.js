@@ -583,7 +583,6 @@ const weeklydataPlat = (arr, callback) => {
   });
 }
 
-
 const changeMembershipToPlat = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 10 , memberShip = 'plat'   WHERE name = ? `;
   connection.query(sql,arr, (err, data) => {
@@ -605,10 +604,12 @@ const changeMembershipToGold = (arr, callback) => {
     }
   });
 }
- //increment numberOfLikes inside post
-const incrementLikes = (postId, callback) => {
-  let sql = `update post Set numberOfLikes = numberOfLikes + 1 where id = ${postId}`
-  connection.query(sql, (err, data) => {
+
+//let sql = `UPDATE post SET ${arr[i]} = '${arr1[i]}' WHERE id = '${id}'`
+//save users report to db
+const userReports = (arr, callback) => {
+  let sql = `insert into reports (username ,typeOfUser, message) values (?,?,?)`
+  connection.query(sql,arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
@@ -617,10 +618,46 @@ const incrementLikes = (postId, callback) => {
   });
 }
 
+//get the reports for the admin 
+const getReports = (callback) => {
+  connection.query('select * from reports',(err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  })
+}
+
+//delete one report for the admin
+const delOneReport = (id, callback) => {
+  let sql = `DELETE FROM reports WHERE id = '${id}'`
+  connection.query(sql ,(err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//delete all report for the admin 
+const delAllReports = (callback) =>{
+  connection.query(`TRUNCATE TABLE reports` ,(err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+} 
 
 
 module.exports = {
-  incrementLikes,
+  delAllReports,
+  delOneReport,
+  getReports,
+  userReports,
   changeMembershipToPlat,
   changeMembershipToGold,
   weeklydataPlat,

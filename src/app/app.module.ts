@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterStudentComponent } from './register-student/register-student.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { VerficationComponent } from './verfication/verfication.component';
 import { SendRequestforVerificationComponent } from './send-requestfor-verification/send-requestfor-verification.component';
@@ -44,6 +44,9 @@ import { StudentFeedComponent } from './student-feed/student-feed.component';
 import { NotificationComponent } from './notification/notification.component';
 
 import { AdminWeeklyUpdateComponent } from './admin-weekly-update/admin-weekly-update.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { ReportsToAdminComponent } from './reports-to-admin/reports-to-admin.component';
+import { AdminReportComponent } from './admin-report/admin-report.component';
 
 @NgModule({
   declarations: [
@@ -83,13 +86,17 @@ import { AdminWeeklyUpdateComponent } from './admin-weekly-update/admin-weekly-u
     StudentFeedComponent,
     NotificationComponent,
     AdminWeeklyUpdateComponent,
+    LoginAdminComponent,
+    ReportsToAdminComponent,
+    AdminReportComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

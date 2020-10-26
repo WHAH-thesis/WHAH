@@ -82,8 +82,7 @@ CREATE TABLE post(
     rate INTEGER(10)  ,
     salary INTEGER(50)   DEFAULT 1, 
     contact VARCHAR(50) ,
-   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   numberOfLikes INTEGER(50) NOT NULL DEFAULT(0)
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE notification (
  id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -91,3 +90,10 @@ CREATE TABLE notification (
    owner VARCHAR(50) ,
    studentName VARCHAR(50)
 );
+
+CREATE TABLE reports(
+  id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  message VARCHAR(150),
+  typeOfUser VARCHAR(15),
+  username VARCHAR(50)
+)
