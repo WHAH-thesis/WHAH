@@ -39,6 +39,8 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { ReportsToAdminComponent } from './reports-to-admin/reports-to-admin.component';
 import { AdminReportComponent } from './admin-report/admin-report.component'; 
 
+import { ReportComponent } from './report/report.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 const routes: Routes = [
   { path: 'register/student', component: VerficationComponent },
@@ -82,6 +84,9 @@ const routes: Routes = [
   { path: 'admin/login', component: LoginAdminComponent },
   { path: 'sendReport' , component: ReportsToAdminComponent},
   { path: 'AdminReport', component: AdminReportComponent}
+  { path: 'report/post', component: ReportComponent },
+  { path: 'report/admin', component: AdminReportsComponent }
+
 ];
 
 @NgModule({
