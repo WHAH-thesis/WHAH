@@ -106,7 +106,7 @@ app.post("/api/users/registerCompany", (req, res) => {
 ////////////////////////////// Registration TRAINING CENTER /////////////////////////////////////
 
 app.post("/api/users/registerTrainingCenter", (req, res) => {
-  console.log("this is logo " , req.body.logo)
+  console.log("this is logo ", req.body.logo);
   var registerArray = [
     req.body.email,
     req.body.owner,
@@ -268,7 +268,8 @@ app.post("/addStudents", (req, res) => {
   });
 });
 
-// LOG IN 
+// LOG IN
+
 app.post("/login", (req, res) => {
   db.getUserInfo(req.body.username, (err, data) => {
     if (err) throw res.send("error");
@@ -401,18 +402,18 @@ app.post("/api/users/Update", (req, res) => {
   jwt.verify(token, "privatekey", (err, decoded) => {
     username = decoded.obj.username;
   });
-  var obj = {}
-  for(var i = 0 ; i < req.body[0].length ; i++){
-    obj[req.body[1][i]] = req.body[0][i]
+  var obj = {};
+  for (var i = 0; i < req.body[0].length; i++) {
+    obj[req.body[1][i]] = req.body[0][i];
   }
-  for(var key in obj){
-    if(!obj[key]){
-      delete obj[key]
+  for (var key in obj) {
+    if (!obj[key]) {
+      delete obj[key];
     }
   }
-  db.updateUser(username , obj, (err, data)=>{
-    err? console.log(err) :console.log(data)
-  })
+  db.updateUser(username, obj, (err, data) => {
+    err ? console.log(err) : console.log(data);
+  });
 });
 
 app.post("/api/users/findProfil", (req, res) => {
@@ -647,94 +648,87 @@ app.post("/api/posts/addPost", (req, res) => {
     req.body.salary,
     req.body.contact,
   ];
-  var array2 = [
-    req.body.newNumberOfPosts,
-    req.body.idCenter
-  ]
+  var array2 = [req.body.newNumberOfPosts, req.body.idCenter];
 
   db.addPost(array, (err, data) => {
-    err ? console.log(err) : db.updateNumberOfPosts(array2, (err, data) => {
-      err ? console.log(err) : res.send(data)
-    })
+    err
+      ? console.log(err)
+      : db.updateNumberOfPosts(array2, (err, data) => {
+          err ? console.log(err) : res.send(data);
+        });
   });
 });
- 
-
 
 app.post("/api/posts/delete", (req, res) => {
-  var array = [
-    req.body.id,
-  ];
+  var array = [req.body.id];
   db.deletePost(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
 });
-app.post('/api/addPosts', (req, res)=>{
-  var postData = req.body['0']
-  console.log(postData)
-  db.savePosts( postData, (err, data)=>{
+app.post("/api/addPosts", (req, res) => {
+  var postData = req.body["0"];
+  console.log(postData);
+  db.savePosts(postData, (err, data) => {
     if (err) throw err;
-   console.log(data);
-  })
-})
+    console.log(data);
+  });
+});
 
-app.post('/api/center/update', (req, res)=>{
-  console.log(req.body)
-  var token = req.body['2']
+app.post("/api/center/update", (req, res) => {
+  console.log(req.body);
+  var token = req.body["2"];
   var username = "";
   jwt.verify(token, "privatekey", (err, decoded) => {
     username = decoded.obj.name;
   });
-  var obj = {}
-  for(var i = 0 ; i < req.body[0].length ; i++){
-    obj[req.body[1][i]] = req.body[0][i]
+  var obj = {};
+  for (var i = 0; i < req.body[0].length; i++) {
+    obj[req.body[1][i]] = req.body[0][i];
   }
-  for(var key in obj){
-    if(!obj[key]){
-      delete obj[key]
+  for (var key in obj) {
+    if (!obj[key]) {
+      delete obj[key];
     }
   }
-  db.updateTc(username , obj, (err, data)=>{
-    err? console.log(err) :console.log(data)
-  })
-})
-
+  db.updateTc(username, obj, (err, data) => {
+    err ? console.log(err) : console.log(data);
+  });
+});
 
 //get the company posts by the owner name
 
-app.post('/api/sreachByOwner', (req, res)=>{
-  db.postsByOwner(req.body.owner, (err, data)=>{
-    err? console.log(err) :res.send(data) 
-  })
+app.post("/api/sreachByOwner", (req, res) => {
+  db.postsByOwner(req.body.owner, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
 
-})
+//delete posts inside company profile using owner
+app.post("/api/rmCompanyPosts", (req, res) => {
+  console.log("id ==== >", req.body);
+  db.delCompPosts(req.body.id, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
 
-  //delete posts inside company profile using owner
-app.post('/api/rmCompanyPosts', (req, res)=>{
-  console.log('id ==== >' ,req.body)
-  db.delCompPosts(req.body.id, (err, data)=>{
-    err? console.log(err) :res.send(data) 
-  })
-}) 
+//find company posts by id before modify
+app.post("/api/upCompanyPost", (req, res) => {
+  const id = req.body["2"];
 
-  //find company posts by id before modify
-app.post('/api/upCompanyPost', (req, res)=>{
-  const id = req.body['2'];
-
-  var obj = {}
-  for(var i = 0 ; i < req.body[0].length ; i++){
-    obj[req.body[1][i]] = req.body[0][i]
+  var obj = {};
+  for (var i = 0; i < req.body[0].length; i++) {
+    obj[req.body[1][i]] = req.body[0][i];
   }
-  for(var key in obj){
-    if(!obj[key]){
-      delete obj[key]
+  for (var key in obj) {
+    if (!obj[key]) {
+      delete obj[key];
     }
   }
-  console.log(obj)
-  db.updateOnePost(id, obj,(err, data)=>{
-    err? console.log(err) :console.log(data) 
-  })
-})
+  console.log(obj);
+  db.updateOnePost(id, obj, (err, data) => {
+    err ? console.log(err) : console.log(data);
+  });
+});
 
 app.post("/api/users/postsTc", (req, res) => {
   var array = [req.body.owner];
@@ -743,34 +737,30 @@ app.post("/api/users/postsTc", (req, res) => {
     res.send(data);
   });
 });
-app.post('/api/update',(req,res)=>{
- var arr=req.body;
- var obj1=arr[0];
- var obj2=arr[1];
-var arr1=Object.values(obj1)
-var arr2=Object.values(obj2)
-console.log(arr1,arr2)
-for(var i=0;i<arr1.length;i++){
-  if(!arr1[i]){
-    arr1[i]=arr2[i];
+app.post("/api/update", (req, res) => {
+  var arr = req.body;
+  var obj1 = arr[0];
+  var obj2 = arr[1];
+  var arr1 = Object.values(obj1);
+  var arr2 = Object.values(obj2);
+  console.log(arr1, arr2);
+  for (var i = 0; i < arr1.length; i++) {
+    if (!arr1[i]) {
+      arr1[i] = arr2[i];
+    }
   }
-  
-}
-console.log (arr1);
-db.updatePost(arr1, (err, data) => {
-  err ? console.log(err) : res.send(data);
+  console.log(arr1);
+  db.updatePost(arr1, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
 });
- 
-})
 
 app.post("/api/posts/deleteTc", (req, res) => {
-  var array = [
-    req.body.id,
-  ];
+  var array = [req.body.id];
   db.deletePostTc(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
+});
 
 app.get("/api/students", (req, res) => {
   db.getAllStudents((err, data) => {
@@ -792,66 +782,56 @@ app.get("/api/trainingCenters", (req, res) => {
   });
 });
 
-
 app.post("/api/users/ban/student", (req, res) => {
-  var array = [
-    req.body.id,
-  ];
+  var array = [req.body.id];
   db.banStudent(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
+});
 
 app.post("/api/users/ban/company", (req, res) => {
-  var array = [
-    req.body.id,
-  ];
+  var array = [req.body.id];
   db.banCompany(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
+});
 
 app.post("/api/users/ban/training", (req, res) => {
-  var array = [
-    req.body.id,
-  ];
+  var array = [req.body.id];
   db.banCenter(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
-app.post("/api/student/apply",(req,res)=>{
-  var arr =Object.values(req.body);
-  db.StApply(arr,(err,data)=>{
-    err?console.log(err):res.send(data);
-  })
-})
-app.post('/api/getNotification',(req,res)=>{
-  var arr = [req.body.owner]
-  db.getStudentApplication( arr, (err,data)=>{
+});
+app.post("/api/student/apply", (req, res) => {
+  var arr = Object.values(req.body);
+  db.StApply(arr, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+app.post("/api/getNotification", (req, res) => {
+  var arr = [req.body.owner];
+  db.getStudentApplication(arr, (err, data) => {
     if (err) throw err;
     res.send(data);
-  })})
-  app.post('/api/deleteApply',(req,res)=>{
-    db.deleteApp( req.body.id, (err, data)=>{
-      err? console.log(err) :res.send(data) 
-    })
-   
-  })
-  app.post('/api/acceptapply',(req,res)=>{
-    db.acceptApp( req.body.id, (err, data)=>{
-      err? console.log(err) :res.send(data) 
-    })
-   
-  })
-  
+  });
+});
+app.post("/api/deleteApply", (req, res) => {
+  db.deleteApp(req.body.id, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+app.post("/api/acceptapply", (req, res) => {
+  db.acceptApp(req.body.id, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
 
 app.post("/api/users/numberOfPosts", (req, res) => {
-  var id = req.body.id
+  var id = req.body.id;
   db.getCenterNumberOfPostsAvailble(id, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
-
+});
 
 app.get("/api/posts/weeklyPosts/siver", (req, res) => {
   db.weeklydataSilver((err, data) => {
@@ -875,55 +855,73 @@ app.get("/api/posts/weeklyPosts/plat", (req, res) => {
 });
 
 app.post("/api/users/PlatMembership", (req, res) => {
-  var name = [req.body.name]
+  var name = [req.body.name];
   db.changeMembershipToPlat(name, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
+});
 
 app.post("/api/users/GoldMembership", (req, res) => {
-  var name = [req.body.name]
+  var name = [req.body.name];
   db.changeMembershipToGold(name, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
-}); 
+});
 
 //save users report to db
 
-app.post('/api/users/Reports', (req, res) => {
-  let obj = req.body
-  for(var key in obj){
-    if(!obj[key]){
-       obj[key] = "anonymous"
+app.post("/api/users/Reports", (req, res) => {
+  let obj = req.body;
+  for (var key in obj) {
+    if (!obj[key]) {
+      obj[key] = "anonymous";
     }
   }
-  console.log(obj)
+  console.log(obj);
   db.userReports(Object.values(obj), (err, data) => {
     err ? console.log(err) : console.log(data);
   });
-})
+});
 
 //get the reports for the admin
-app.get('/api/admin/getReports',(req, res) =>{
-  db.getReports( (err, data) => {
+app.get("/api/admin/getReports", (req, res) => {
+  db.getReports((err, data) => {
     err ? console.log(err) : res.send(data);
   });
-})
+});
 
 //delete one report for the admin
-app.post('/api/admin/delReports', (req, res)=>{
-  console.log(req.body.id)
+app.post("/api/admin/delReports", (req, res) => {
+  console.log(req.body.id);
   db.delOneReport(req.body.id, (err, data) => {
     err ? console.log(err) : console.log(data);
   });
-}) 
+});
 
 //delete all report for the admin
-app.delete('/api/admin/delAllReports', (req, res)=>{
+app.delete("/api/admin/delAllReports", (req, res) => {
   db.delAllReports((err, data) => {
     err ? console.log(err) : console.log(data);
-  })
-})
+  });
+});
 
+app.post("/api/report", (req, res) => {
+  var report = [
+    req.body.name,
+    req.body.reason,
+    req.body.comment,
+    req.body.postId,
+  ];
+  db.reportSt(report, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+
+app.get("/api/adminReports", (req, res) => {
+  db.getReportsFromUser((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
