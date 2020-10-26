@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
+
 })
 export class LocalService {
   // connected user name
@@ -18,5 +19,6 @@ export class LocalService {
   post: any;
   // reported post data
   reported: any;
+
   constructor() {}
 }

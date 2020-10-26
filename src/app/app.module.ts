@@ -50,6 +50,7 @@ import { AdminReportComponent } from './admin-report/admin-report.component';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { ReportComponent } from './report/report.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +94,7 @@ import { ReportComponent } from './report/report.component';
     AdminReportComponent,
     AdminReportsComponent,
     ReportComponent,
+
   ],
   imports: [
     BrowserModule,

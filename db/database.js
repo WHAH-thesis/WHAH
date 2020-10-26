@@ -599,6 +599,7 @@ const changeMembershipToGold = (arr, callback) => {
 const userReports = (arr, callback) => {
   let sql = `insert into feedbacks (username ,typeOfUser, message) values (?,?,?)`;
   connection.query(sql, arr, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
@@ -610,6 +611,7 @@ const userReports = (arr, callback) => {
 //get the reports for the admin
 const getReports = (callback) => {
   connection.query("select * from feedbacks", (err, data) => {
+
     if (err) {
       callback(err);
     } else {
@@ -622,6 +624,7 @@ const getReports = (callback) => {
 const delOneReport = (id, callback) => {
   let sql = `DELETE FROM feedbacks WHERE id = '${id}'`;
   connection.query(sql, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
@@ -633,6 +636,7 @@ const delOneReport = (id, callback) => {
 //delete all report for the admin
 const delAllReports = (callback) => {
   connection.query(`TRUNCATE TABLE feedbacks`, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
@@ -663,6 +667,7 @@ const getReportsFromUser = (callback) => {
 module.exports = {
   getReportsFromUser,
   reportSt,
+
   delAllReports,
   delOneReport,
   getReports,

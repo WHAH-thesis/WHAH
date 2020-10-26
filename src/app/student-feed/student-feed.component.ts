@@ -31,6 +31,7 @@ export class StudentFeedComponent implements OnInit {
         "Dear Student , your application is saved , we'll conatct you as soon as possible"
       );
       this.router.navigateByUrl("/studentProfile");
+
     });
   }
   // see the all the post

@@ -251,6 +251,7 @@ app.post("/api/users/getCentersatate", (req, res) => {
   });
 });
 
+
 // SIGN UP STUDENT
 app.post("/addStudents", (req, res) => {
   console.log(req.body);
@@ -268,6 +269,7 @@ app.post("/addStudents", (req, res) => {
 });
 
 // LOG IN
+
 app.post("/login", (req, res) => {
   db.getUserInfo(req.body.username, (err, data) => {
     if (err) throw res.send("error");

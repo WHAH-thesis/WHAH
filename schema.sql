@@ -92,6 +92,7 @@ CREATE TABLE notification (
 );
 
 CREATE TABLE feedbacks(
+
   id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   message VARCHAR(150),
   typeOfUser VARCHAR(15),
@@ -105,3 +106,4 @@ reason VARCHAR(50) ,
 comment VARCHAR(250),
 postId VARCHAR(50)
 );
+

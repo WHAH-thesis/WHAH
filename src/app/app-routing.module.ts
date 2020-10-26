@@ -94,6 +94,7 @@ const routes: Routes = [
   { path: "AdminReport", component: AdminReportComponent },
   { path: "report/post", component: ReportComponent },
   { path: "report/admin", component: AdminReportsComponent },
+
 ];
 
 @NgModule({
