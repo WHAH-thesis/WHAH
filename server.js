@@ -106,15 +106,14 @@ app.post("/api/users/registerCompany", (req, res) => {
 ////////////////////////////// Registration TRAINING CENTER /////////////////////////////////////
 
 app.post("/api/users/registerTrainingCenter", (req, res) => {
+  console.log("this is logo " , req.body.logo)
   var registerArray = [
     req.body.email,
     req.body.owner,
     req.body.trainingOptions,
     req.body.numberOfStudent,
     req.body.location,
-
     req.body.website,
-
     req.body.logo,
     req.body.about,
     "false",
@@ -199,7 +198,7 @@ app.post("/api/users/rejectCenter", (req, res) => {
     res.send(data);
   });
 });
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////GET NON VERIFIED USERS///////////////////////////////////////////
 
 app.get("/api/users/getNonVerifiedStudents", async (req, res) => {
   try {
@@ -227,7 +226,7 @@ app.get("/api/users/getNonVerifiedCenters", async (req, res) => {
     console.error(err);
   }
 });
-
+//////////////// GET USER STATE ////////////
 app.post("/api/users/getUsersatate", (req, res) => {
   console.log(req.body);
   db.getUserStatus(req.body.username, (err, data) => {
@@ -252,6 +251,8 @@ app.post("/api/users/getCentersatate", (req, res) => {
   });
 });
 
+
+// SIGN UP STUDENT
 app.post("/addStudents", (req, res) => {
   console.log(req.body);
   var arr = [
@@ -267,10 +268,10 @@ app.post("/addStudents", (req, res) => {
   });
 });
 
+// LOG IN 
 app.post("/login", (req, res) => {
   db.getUserInfo(req.body.username, (err, data) => {
-    if (err) throw err;
-
+    if (err) throw res.send("error");
     console.log(data[0].password);
     var boolean = bcrypt.compareSync(req.body.password, data[0].password);
     var obj = {
@@ -290,7 +291,6 @@ app.post("/login", (req, res) => {
             err ? console.log(err) : res.status(200).json({ token: token });
             db.saveUserToken(req.body.username, token, (err, data) => {
               if (err) throw err;
-              console.log("token saved");
             });
           }
         )
@@ -370,7 +370,7 @@ app.post("/loginTC", (req, res) => {
       : res.send({ err });
   });
 });
-
+////////////////// ADD TOKENS TO DATABASE //////////////
 app.post("/api/users/studentToken", (req, res) => {
   db.selectUserByToken(req.body.token, (err, data) => {
     if (err) throw err;
@@ -647,10 +647,19 @@ app.post("/api/posts/addPost", (req, res) => {
     req.body.salary,
     req.body.contact,
   ];
+  var array2 = [
+    req.body.newNumberOfPosts,
+    req.body.idCenter
+  ]
+
   db.addPost(array, (err, data) => {
-    err ? console.log(err) : res.send(data);
+    err ? console.log(err) : db.updateNumberOfPosts(array2, (err, data) => {
+      err ? console.log(err) : res.send(data)
+    })
   });
 });
+ 
+
 
 app.post("/api/posts/delete", (req, res) => {
   var array = [
@@ -689,5 +698,213 @@ app.post('/api/center/update', (req, res)=>{
     err? console.log(err) :console.log(data)
   })
 })
+
+
+//get the company posts by the owner name
+
+app.post('/api/sreachByOwner', (req, res)=>{
+  db.postsByOwner(req.body.owner, (err, data)=>{
+    err? console.log(err) :res.send(data) 
+  })
+
+})
+
+  //delete posts inside company profile using owner
+app.post('/api/rmCompanyPosts', (req, res)=>{
+  console.log('id ==== >' ,req.body)
+  db.delCompPosts(req.body.id, (err, data)=>{
+    err? console.log(err) :res.send(data) 
+  })
+}) 
+
+  //find company posts by id before modify
+app.post('/api/upCompanyPost', (req, res)=>{
+  const id = req.body['2'];
+
+  var obj = {}
+  for(var i = 0 ; i < req.body[0].length ; i++){
+    obj[req.body[1][i]] = req.body[0][i]
+  }
+  for(var key in obj){
+    if(!obj[key]){
+      delete obj[key]
+    }
+  }
+  console.log(obj)
+  db.updateOnePost(id, obj,(err, data)=>{
+    err? console.log(err) :console.log(data) 
+  })
+})
+
+app.post("/api/users/postsTc", (req, res) => {
+  var array = [req.body.owner];
+  db.getPostsOfTc(array, (err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+app.post('/api/update',(req,res)=>{
+ var arr=req.body;
+ var obj1=arr[0];
+ var obj2=arr[1];
+var arr1=Object.values(obj1)
+var arr2=Object.values(obj2)
+console.log(arr1,arr2)
+for(var i=0;i<arr1.length;i++){
+  if(!arr1[i]){
+    arr1[i]=arr2[i];
+  }
+  
+}
+console.log (arr1);
+db.updatePost(arr1, (err, data) => {
+  err ? console.log(err) : res.send(data);
+});
+ 
+})
+
+app.post("/api/posts/deleteTc", (req, res) => {
+  var array = [
+    req.body.id,
+  ];
+  db.deletePostTc(array, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.get("/api/students", (req, res) => {
+  db.getAllStudents((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.get("/api/companies", (req, res) => {
+  db.getAllCompanies((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+app.get("/api/trainingCenters", (req, res) => {
+  db.getAllTrainingCenters((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+
+app.post("/api/users/ban/student", (req, res) => {
+  var array = [
+    req.body.id,
+  ];
+  db.banStudent(array, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.post("/api/users/ban/company", (req, res) => {
+  var array = [
+    req.body.id,
+  ];
+  db.banCompany(array, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.post("/api/users/ban/training", (req, res) => {
+  var array = [
+    req.body.id,
+  ];
+  db.banCenter(array, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+app.post("/api/student/apply",(req,res)=>{
+  var arr =Object.values(req.body);
+  db.StApply(arr,(err,data)=>{
+    err?console.log(err):res.send(data);
+  })
+})
+app.post('/api/getNotification',(req,res)=>{
+  var arr = [req.body.owner]
+  db.getStudentApplication( arr, (err,data)=>{
+    if (err) throw err;
+    res.send(data);
+  })})
+  app.post('/api/deleteApply',(req,res)=>{
+    db.deleteApp( req.body.id, (err, data)=>{
+      err? console.log(err) :res.send(data) 
+    })
+   
+  })
+  app.post('/api/acceptapply',(req,res)=>{
+    db.acceptApp( req.body.id, (err, data)=>{
+      err? console.log(err) :res.send(data) 
+    })
+   
+  })
+  
+
+app.post("/api/users/numberOfPosts", (req, res) => {
+  var id = req.body.id
+  db.getCenterNumberOfPostsAvailble(id, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+
+app.get("/api/posts/weeklyPosts/siver", (req, res) => {
+  db.weeklydataSilver((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.get("/api/posts/weeklyPosts/gold", (req, res) => {
+  db.weeklydataGold((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.get("/api/posts/weeklyPosts/plat", (req, res) => {
+  db.weeklydataPlat((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.post("/api/users/PlatMembership", (req, res) => {
+  var name = [req.body.name]
+  db.changeMembershipToPlat(name, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.post("/api/users/GoldMembership", (req, res) => {
+  var name = [req.body.name]
+  db.changeMembershipToGold(name, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.post("/api/report", (req, res) => {
+  var report = [req.body.name,
+    req.body.reason,
+    req.body.comment,
+    req.body.postId
+  
+  ]
+  db.reportSt(report, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+}); 
+
+app.get("/api/adminReports", (req, res) => {
+  db.getReportsFromUser((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
