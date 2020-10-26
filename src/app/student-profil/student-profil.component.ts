@@ -38,7 +38,6 @@ export class StudentProfilComponent implements OnInit {
   }
   takeMeToReports(){
     this.router.navigateByUrl('sendReport')
-
   }
   // feed(){
   //   this.router.navigateByUrl('/feed/student');

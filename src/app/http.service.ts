@@ -249,12 +249,5 @@ export class HttpService {
   }
   deleteAllReports(){
     return this.http.delete(this.ROOT_URL + '/api/admin/delAllReports')
-  ////////////////////////// sending the reports //////////////////
-  reportPost(obj) {
-    return this.http.post(this.ROOT_URL + '/api/report', obj);
-  }
-  ////////////////////////Admin side for receiving the reports /////////////////
-  getReports() {
-    return this.http.get(this.ROOT_URL + '/api/adminReports');
   }
 }
