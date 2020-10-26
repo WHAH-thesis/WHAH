@@ -16,10 +16,10 @@ import { RegisterCompaniesComponent } from './register-companies/register-compan
 import { TcsignupComponent } from './tcsignup/tcsignup.component';
 import { LoginTcComponent } from './login-tc/login-tc.component';
 import { StudentProfilComponent } from './student-profil/student-profil.component';
-import { ProfileCompanyComponent } from "./profile-company/profile-company.component"
+import { ProfileCompanyComponent } from './profile-company/profile-company.component';
 import { ProfilTcComponent } from './profil-tc/profil-tc.component';
-import { EditStudentProfileComponent} from './edit-student-profile/edit-student-profile.component'
-import { SearchResultComponent} from './search-result/search-result.component'
+import { EditStudentProfileComponent } from './edit-student-profile/edit-student-profile.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { FeedComponent } from './feed/feed.component';
 import { PostCenterComponent } from './post-center/post-center.component';
@@ -27,17 +27,28 @@ import { PostComponent } from './post/post.component';
 import { AdminPostsComponent } from './admin-posts/admin-posts.component';
 import { TrainingCenterEditComponent } from './training-center-edit/training-center-edit.component';
 import { PostComapnyComponent } from './post-comapny/post-comapny.component';
+import { TcPostsComponent } from './tc-posts/tc-posts.component';
+import { ModifyPostTcComponent } from './modify-post-tc/modify-post-tc.component';
+import { PostsCompanyProfileComponent } from './posts-company-profile/posts-company-profile.component';
+import { UpdateCompanyPostsComponent } from './update-company-posts/update-company-posts.component';
+import { BanUsersComponent } from './ban-users/ban-users.component';
+import { StudentFeedComponent } from './student-feed/student-feed.component';
+import { NotificationComponent } from './notification/notification.component';
+import { AdminWeeklyUpdateComponent } from './admin-weekly-update/admin-weekly-update.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { ReportComponent } from './report/report.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 const routes: Routes = [
   { path: 'register/student', component: VerficationComponent },
-  { path: 'verification/request/student', component: SendRequestforVerificationComponent },
+  { path: 'verification/request/student',component: SendRequestforVerificationComponent,},
   { path: 'admin', component: AdminVerificationComponent },
   { path: 'wait', component: WaitingComponent },
   { path: '', component: LandingComponent },
   { path: 'register/company', component: CompanyRegisterComponent },
   { path: 'register/center', component: TrainingCenterRegisterComponent },
-  { path: 'verification/request/company', component: SendRequestCompanyComponent },
-  { path: 'verification/request/center', component: SendRequestCenterComponent },
+  { path: 'verification/request/company',component: SendRequestCompanyComponent,},
+  { path: 'verification/request/center',component: SendRequestCenterComponent,},
   { path: 'signup/student', component: StudentRegisterComponent },
   { path: 'signin/student', component: StudentLoginComponent },
   { path: 'signin/company', component: LoginCompaniesComponent },
@@ -47,15 +58,29 @@ const routes: Routes = [
   { path: 'studentProfile', component: StudentProfilComponent },
   { path: 'company/profile', component: ProfileCompanyComponent },
   { path: 'center/profile', component: ProfilTcComponent },
-  { path: 'editStudent' , component : EditStudentProfileComponent},
+  { path: 'editStudent', component: EditStudentProfileComponent },
   { path: 'resultSearch', component: SearchResultComponent },
-  { path: 'editCompany', component: CompanyEditComponent }, 
-  { path: 'feed', component: FeedComponent }, 
-  { path : 'post/center' , component : PostCenterComponent},
-  { path : 'post' , component : PostComponent},
-  { path : 'admin/delete' , component : AdminPostsComponent},
-  { path: 'editTc', component : TrainingCenterEditComponent},
-  { path: 'post/company', component : PostComapnyComponent}
+  { path: 'editCompany', component: CompanyEditComponent },
+  { path: 'feed', component: FeedComponent },
+  { path: 'post/center', component: PostCenterComponent },
+  { path: 'post', component: PostComponent },
+  { path: 'admin/delete', component: AdminPostsComponent },
+  { path: 'editTc', component: TrainingCenterEditComponent },
+  { path: 'post/company', component: PostComapnyComponent },
+  { path: 'post/center', component: PostCenterComponent },
+  { path: 'own/posts', component: TcPostsComponent },
+  { path: 'modify/tc/posts', component: ModifyPostTcComponent },
+  { path: 'companyOwnPost', component: PostsCompanyProfileComponent },
+  { path: 'updateCompPost', component: UpdateCompanyPostsComponent },
+  { path: 'post/center', component: PostCenterComponent },
+  { path: 'own/posts', component: TcPostsComponent },
+  { path: 'admin/ban', component: BanUsersComponent },
+  { path: 'feed/student', component: StudentFeedComponent },
+  { path: 'notification', component: NotificationComponent },
+  { path: 'admin/update', component: AdminWeeklyUpdateComponent },
+  { path: 'admin/login', component: LoginAdminComponent },
+  { path: 'report/post', component: ReportComponent },
+  { path: 'report/admin', component: AdminReportsComponent }
 
 ];
 
