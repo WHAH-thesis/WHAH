@@ -19,8 +19,8 @@ export class HttpService {
     return this.http.post(this.ROOT_URL + '/addStudents', data);
   }
   //////////////// LOG IN /////////////////////////
-  loginStudent(data) {
-    return this.http.post(this.ROOT_URL + '/login', data);
+  loginStudent(obj) {
+    return this.http.post(this.ROOT_URL + '/login', obj);
   }
   loginCompanies(data) {
     return this.http.post(this.ROOT_URL + '/loginCompanies', data);
