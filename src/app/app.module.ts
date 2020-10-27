@@ -47,6 +47,9 @@ import { AdminWeeklyUpdateComponent } from './admin-weekly-update/admin-weekly-u
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { ReportsToAdminComponent } from './reports-to-admin/reports-to-admin.component';
 import { AdminReportComponent } from './admin-report/admin-report.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
+import { ReportComponent } from './report/report.component';
+
 
 @NgModule({
   declarations: [
@@ -89,6 +92,9 @@ import { AdminReportComponent } from './admin-report/admin-report.component';
     LoginAdminComponent,
     ReportsToAdminComponent,
     AdminReportComponent,
+    AdminReportsComponent,
+    ReportComponent,
+
   ],
   imports: [
     BrowserModule,

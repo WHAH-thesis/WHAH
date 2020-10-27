@@ -91,9 +91,19 @@ CREATE TABLE notification (
    studentName VARCHAR(50)
 );
 
-CREATE TABLE reports(
+CREATE TABLE feedbacks(
+
   id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   message VARCHAR(150),
   typeOfUser VARCHAR(15),
   username VARCHAR(50)
-)
+);
+
+CREATE TABLE reports (
+ id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50) ,
+reason VARCHAR(50) ,
+comment VARCHAR(250),
+postId VARCHAR(50)
+);
+

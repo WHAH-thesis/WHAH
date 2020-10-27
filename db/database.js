@@ -1,6 +1,4 @@
 const mysql = require("mysql");
-const { register } = require("ts-node");
-const { user } = require("./config.js");
 const mysqlConfig = require("./config.js");
 const connection = mysql.createConnection(mysqlConfig);
 
@@ -176,13 +174,23 @@ const addStudent = (arr, callback) => {
   });
 };
 
-const getUserInfo = (username, callback) => {
-  let sql = `select password from students where username = ?`;
-  connection.query(sql, username, (err, data) => {
+const getUserInfo = (username ,callback) => {
+  let sql = `select password from students where username = '${username}' or email = '${username}'`;
+  connection.query(sql,(err, data) => {
     if (err) throw callback(err);
     callback(null, data);
   });
 };
+
+const usernameAndEmail = (callback) => {
+  let sql = `select username,email from students;`;
+  connection.query(sql, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+
 
 const addCompany = (arr, callback) => {
   let sql = "insert into companies (name,password) values(?,?)";
@@ -190,6 +198,16 @@ const addCompany = (arr, callback) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
+
+const companyName = (callback) => {
+  let sql = `select name from companies;`;
+  connection.query(sql, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+
 const logCompanies = (name, callback) => {
   let sql = `select password from companies where name = ?`;
   connection.query(sql, name, (err, data) => {
@@ -203,6 +221,16 @@ const addTC = (arr, callback) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
+
+const checkTcName = (callback) => {
+  let sql = `select name from trainingCenters;`;
+  connection.query(sql, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+
 const logTC = (name, callback) => {
   let sql = `select password from trainingCenters where name = ?`;
   connection.query(sql, name, (err, data) => {
@@ -212,8 +240,8 @@ const logTC = (name, callback) => {
 };
 
 const getUserStatus = (username, callback) => {
-  let sql = `select * from students where username = ?`;
-  connection.query(sql, username, (err, data) => {
+  let sql = `select * from students where username = '${username}' or email = '${username}'`;
+  connection.query(sql,  (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
@@ -290,9 +318,6 @@ const selectTcByToken = (token, callback) => {
 
 /////////////////////////////////////////////////
 
-// UPDATE Person
-// SET Address = 'ups'
-// WHERE LastName = 'Hussein'
 
 const updateUser = (username, obj, callback) => {
   var arr = Object.keys(obj);
@@ -385,7 +410,6 @@ const updateTc = (username, obj, callback) => {
   }
 };
 
-
 //select posts by owner to render in company profile
 
 const postsByOwner = (owner, callback) => {
@@ -397,11 +421,11 @@ const postsByOwner = (owner, callback) => {
       callback(null, data);
     }
   });
-}
+};
 
 //delete posts inside company profile using owner
-const delCompPosts = (id, callback) =>{
-  let sql = `DELETE FROM post WHERE id = ${id}`
+const delCompPosts = (id, callback) => {
+  let sql = `DELETE FROM post WHERE id = ${id}`;
   connection.query(sql, (err, data) => {
     if (err) {
       callback(err);
@@ -409,37 +433,35 @@ const delCompPosts = (id, callback) =>{
       callback(null, data);
     }
   });
-}
+};
 
-  //update company posts by id before modify
-  const updateOnePost = (id, obj, callback) => {
-    var arr = Object.keys(obj);
-    var arr1 = Object.values(obj);
-    for (var i = 0; i < arr.length; i++) {
-      let sql = `UPDATE post SET ${arr[i]} = '${arr1[i]}' WHERE id = '${id}'`;
-      connection.query(sql, (err, data) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, data);
-        }
-      });
-    }
-  };
+//update company posts by id before modify
+const updateOnePost = (id, obj, callback) => {
+  var arr = Object.keys(obj);
+  var arr1 = Object.values(obj);
+  for (var i = 0; i < arr.length; i++) {
+    let sql = `UPDATE post SET ${arr[i]} = '${arr1[i]}' WHERE id = '${id}'`;
+    connection.query(sql, (err, data) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    });
+  }
+};
 
-
-
-const getPostsOfTc = (arr,callback) => {
+const getPostsOfTc = (arr, callback) => {
   let sql = `select * from post WHERE owner = ?  `;
-  connection.query(sql, arr , (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
 };
-const  updatePost= (arr, callback) => {
+const updatePost = (arr, callback) => {
   let sql =
     "UPDATE post SET  title = ? , description= ? ,   image = ? , salary = ? ,  contact = ?  WHERE id = ? ";
-    connection.query(sql, arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
@@ -481,7 +503,6 @@ const banStudent = (arr, callback) => {
   });
 };
 
-
 const banCompany = (arr, callback) => {
   let sql = "DELETE FROM companies WHERE id = ?";
   connection.query(sql, arr, (err, data) => {
@@ -494,37 +515,32 @@ const banCenter = (arr, callback) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
-const StApply=(arr,callback)=>{
+const StApply = (arr, callback) => {
   let sql = `insert into notification (title ,owner, studentName) values (?,?,?)`;
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
 };
-const getStudentApplication=(arr,callback)=>{
- let sql = `select * from notification WHERE owner = ?  `;
-  connection.query(sql,arr, (err, data) => {
+const getStudentApplication = (arr, callback) => {
+  let sql = `select * from notification WHERE owner = ?  `;
+  connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
+};
 const deleteApp = (arr, callback) => {
-  
   let sql = "DELETE FROM notification WHERE id = ?";
   connection.query(sql, arr, (err, data) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
 const acceptApp = (arr, callback) => {
-  
   let sql = "DELETE FROM notification WHERE id = ?";
   connection.query(sql, arr, (err, data) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
-
-
-
 
 const getCenterNumberOfPostsAvailble = (id, callback) => {
   let sql = `select numberOfPostsAvaible from trainingCenters where id = '${id}'`;
@@ -535,125 +551,148 @@ const getCenterNumberOfPostsAvailble = (id, callback) => {
       callback(null, data);
     }
   });
-}
-
+};
 
 const updateNumberOfPosts = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = ?   WHERE id = ? `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
 const weeklydataSilver = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 3   WHERE memberShip = 'silver' `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
-
+};
 
 const weeklydataGold = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 5   WHERE memberShip = 'gold' `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
 const weeklydataPlat = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 10   WHERE memberShip = 'plat' `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
 const changeMembershipToPlat = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 10 , memberShip = 'plat'   WHERE name = ? `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
 const changeMembershipToGold = (arr, callback) => {
   let sql = `UPDATE trainingCenters SET  numberOfPostsAvaible = 5 , memberShip = 'Gold'   WHERE name = ? `;
-  connection.query(sql,arr, (err, data) => {
+  connection.query(sql, arr, (err, data) => {
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
 //let sql = `UPDATE post SET ${arr[i]} = '${arr1[i]}' WHERE id = '${id}'`
 //save users report to db
 const userReports = (arr, callback) => {
-  let sql = `insert into reports (username ,typeOfUser, message) values (?,?,?)`
-  connection.query(sql,arr, (err, data) => {
+  let sql = `insert into feedbacks (username ,typeOfUser, message) values (?,?,?)`;
+  connection.query(sql, arr, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
-//get the reports for the admin 
+//get the reports for the admin
 const getReports = (callback) => {
-  connection.query('select * from reports',(err, data) => {
+  connection.query("select * from feedbacks", (err, data) => {
+
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
-  })
-}
+  });
+};
 
 //delete one report for the admin
 const delOneReport = (id, callback) => {
-  let sql = `DELETE FROM reports WHERE id = '${id}'`
-  connection.query(sql ,(err, data) => {
+  let sql = `DELETE FROM feedbacks WHERE id = '${id}'`;
+  connection.query(sql, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-}
+};
 
-//delete all report for the admin 
-const delAllReports = (callback) =>{
-  connection.query(`TRUNCATE TABLE reports` ,(err, data) => {
+//delete all report for the admin
+const delAllReports = (callback) => {
+  connection.query(`TRUNCATE TABLE feedbacks`, (err, data) => {
+
     if (err) {
       callback(err);
     } else {
       callback(null, data);
     }
   });
-} 
+};
 
+const reportSt = (arr, callback) => {
+  let sql = `insert into reports (name , reason , comment , postId) values (?,?,? ,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+
+const getReportsFromUser = (callback) => {
+  let sql = `select * from reports `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
 
 module.exports = {
+  usernameAndEmail,
+  getReportsFromUser,
+  reportSt,
   delAllReports,
   delOneReport,
   getReports,
@@ -665,11 +704,11 @@ module.exports = {
   weeklydataSilver,
   updateNumberOfPosts,
   getCenterNumberOfPostsAvailble,
-    acceptApp,
+  acceptApp,
   deleteApp,
   getStudentApplication,
   StApply,
-   updatePost,
+  updatePost,
   updateOnePost,
   delCompPosts,
   postsByOwner,
@@ -713,7 +752,9 @@ module.exports = {
   addStudent,
   getUserInfo,
   addCompany,
+  companyName,
   logCompanies,
+  checkTcName,
   addTC,
   logTC,
   getUserStatus,

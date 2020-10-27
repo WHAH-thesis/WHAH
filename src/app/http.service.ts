@@ -19,8 +19,8 @@ export class HttpService {
     return this.http.post(this.ROOT_URL + '/addStudents', data);
   }
   //////////////// LOG IN /////////////////////////
-  loginStudent(data) {
-    return this.http.post(this.ROOT_URL + '/login', data);
+  loginStudent(obj) {
+    return this.http.post(this.ROOT_URL + '/login', obj);
   }
   loginCompanies(data) {
     return this.http.post(this.ROOT_URL + '/loginCompanies', data);
@@ -117,19 +117,20 @@ export class HttpService {
   }
   // Upload iamge
   uploadImg(img) {
-    return this.http.post(this.ROOT_URL + '/upload', img);
+    return this.http.post(this.ROOT_URL + "/upload", img);
   }
   // upldate profile
   updateData(obj) {
-    return this.http.post(this.ROOT_URL + '/api/users/Update', obj);
+    return this.http.post(this.ROOT_URL + "/api/users/Update", obj);
   }
   // find profile by name
   findProfil(str) {
-    return this.http.post(this.ROOT_URL + '/api/users/findProfil', str);
+    return this.http.post(this.ROOT_URL + "/api/users/findProfil", str);
   }
   // update profile
   updateCompanyData(obj) {
-    return this.http.post(this.ROOT_URL + '/api/company/Update', obj);
+    return this.http.post(this.ROOT_URL + "/api/company/Update", obj);
+
   }
   // GET ALL POSTS
   httpGetPosts() {
@@ -141,19 +142,20 @@ export class HttpService {
   }
   /// DELETE POST
   httpdeletePost(obj) {
-    return this.http.post(this.ROOT_URL + '/api/posts/delete', obj);
+    return this.http.post(this.ROOT_URL + "/api/posts/delete", obj);
   }
   // UPDATE PROFILE
   updateTCData(obj) {
-    return this.http.post(this.ROOT_URL + '/api/center/update', obj);
+    return this.http.post(this.ROOT_URL + "/api/center/update", obj);
   }
   // ADD POST
   savePosts(obj) {
-    return this.http.post(this.ROOT_URL + '/api/addPosts', obj);
+    return this.http.post(this.ROOT_URL + "/api/addPosts", obj);
   }
   // DELETE TRAINING CENTER POST
   httpdeletePostTc(obj) {
-    return this.http.post(this.ROOT_URL + '/api/posts/deleteTc', obj);
+    return this.http.post(this.ROOT_URL + "/api/posts/deleteTc", obj);
+
   }
   //////////////////////// GET ALL USERS //////////////////////
   httpGetStudents() {
@@ -177,47 +179,48 @@ export class HttpService {
   }
   //find own company posts
   findCompanyPosts(obj) {
-    return this.http.post(this.ROOT_URL + '/api/sreachByOwner', obj);
+    return this.http.post(this.ROOT_URL + "/api/sreachByOwner", obj);
   }
   //delete posts inside company profile using owner
   deleteCompanyPosts(obj) {
-    return this.http.post(this.ROOT_URL + '/api/rmCompanyPosts', obj);
+    return this.http.post(this.ROOT_URL + "/api/rmCompanyPosts", obj);
   }
   //update posts from company profile
   updateCompanyPosts(obj) {
-    return this.http.post(this.ROOT_URL + '/api/upCompanyPosts', obj);
+    return this.http.post(this.ROOT_URL + "/api/upCompanyPosts", obj);
   }
   //// GET TRAINING CENTERS POSTS
   httpgetTcPosts(obj) {
-    return this.http.post(this.ROOT_URL + '/api/users/postsTc', obj);
+    return this.http.post(this.ROOT_URL + "/api/users/postsTc", obj);
   }
   /// UPDATE
   update(array) {
-    return this.http.post(this.ROOT_URL + '/api/update', array);
+    return this.http.post(this.ROOT_URL + "/api/update", array);
   }
   //update company posts by id before modify
   postsToModify(obj) {
-    return this.http.post(this.ROOT_URL + '/api/upCompanyPost', obj);
+    return this.http.post(this.ROOT_URL + "/api/upCompanyPost", obj);
   }
   //// APPLY FOR A POST
   applystudent(obj) {
-    return this.http.post(this.ROOT_URL + '/api/student/apply', obj);
+    return this.http.post(this.ROOT_URL + "/api/student/apply", obj);
   }
   // GET ALL APPLICATIONS
   httpGetApplications(obj) {
-    return this.http.post(this.ROOT_URL + '/api/getNotification', obj);
+    return this.http.post(this.ROOT_URL + "/api/getNotification", obj);
   }
   //// ACCEPT APPLICATION OF STUDENT
   httpacceptApp(obj) {
-    return this.http.post(this.ROOT_URL + '/api/acceptapply', obj);
+    return this.http.post(this.ROOT_URL + "/api/acceptapply", obj);
   }
   // REJECT APPLICATION
   httpdeleteApplication(obj) {
-    return this.http.post(this.ROOT_URL + '/api/deleteApply', obj);
+    return this.http.post(this.ROOT_URL + "/api/deleteApply", obj);
   }
   //////// NUMBER OF POSTS AVAILBLE FOR TRAINING CENTER ////////////////
   getNumberOfPostavailble(obj) {
-    return this.http.post(this.ROOT_URL + '/api/users/numberOfPosts', obj);
+    return this.http.post(this.ROOT_URL + "/api/users/numberOfPosts", obj);
+
   }
   //////////////// UPDATE NUMBER OF POSTS ///////////////
   httpUpdateSilver() {
@@ -231,23 +234,32 @@ export class HttpService {
   }
   ////////////////////// UPGRADE TRAINING CENTER MEMBERSHIP /////////
   upgreadToPlat(obj) {
-    return this.http.post(this.ROOT_URL + '/api/users/PlatMembership', obj);
+    return this.http.post(this.ROOT_URL + "/api/users/PlatMembership", obj);
   }
   upgreadToGold(obj) {
-    return this.http.post(this.ROOT_URL + '/api/users/GoldMembership', obj);
+    return this.http.post(this.ROOT_URL + "/api/users/GoldMembership", obj);
   }
   //////////////////// handle the users report to admin //////////////////
-      //save users report to db and get
-  usersReport(obj){
-    return this.http.post(this.ROOT_URL + '/api/users/Reports', obj)
+  //save users report to db and get
+  usersReport(obj) {
+    return this.http.post(this.ROOT_URL + "/api/users/Reports", obj);
   }
-  getUsersReport(){
-    return this.http.get(this.ROOT_URL + '/api/admin/getReports')
-  } 
-  deleteReports(obj){
-    return this.http.post(this.ROOT_URL + '/api/admin/delReports', obj)
+  getUsersReport() {
+    return this.http.get(this.ROOT_URL + "/api/admin/getReports");
   }
-  deleteAllReports(){
-    return this.http.delete(this.ROOT_URL + '/api/admin/delAllReports')
+  deleteReports(obj) {
+    return this.http.post(this.ROOT_URL + "/api/admin/delReports", obj);
+  }
+  deleteAllReports() {
+    return this.http.delete(this.ROOT_URL + "/api/admin/delAllReports");
+  }
+  ////////////////////////// sending the reports //////////////////
+  reportPost(obj) {
+    return this.http.post(this.ROOT_URL + "/api/report", obj);
+  }
+  ////////////////////////Admin side for receiving the reports /////////////////
+  getReports() {
+    return this.http.get(this.ROOT_URL + "/api/adminReports");
+
   }
 }
