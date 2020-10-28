@@ -107,3 +107,13 @@ comment VARCHAR(250),
 postId VARCHAR(50)
 );
 
+CREATE TABLE coach (
+ id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  fullName VARCHAR(50) ,
+diplome VARCHAR(50) ,
+experience VARCHAR(250),
+about VARCHAR(1000) , 
+email  VARCHAR(50) , 
+number INTEGER(20) 
+);
+

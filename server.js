@@ -251,7 +251,6 @@ app.post("/api/users/getCentersatate", (req, res) => {
   });
 });
 
-
 // SIGN UP STUDENT
 app.post("/addStudents", (req, res) => {
   console.log(req.body);
@@ -268,72 +267,83 @@ app.post("/addStudents", (req, res) => {
   });
 });
 
-// LOG IN
+// LOG IN STUDENT
 
 app.post("/login", (req, res) => {
-  db.getUserInfo(req.body.username, (err, data) => {
-    if (err) throw res.send("error");
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      username: req.body.username,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveUserToken(req.body.username, token, (err, data) => {
-              if (err) throw err;
-            });
-          }
-        )
-      : res.send({ err });
+  db.usernameAndEmail((err, data) => {
+    if (err) throw err;
+    myData = data.map((element) => Object.values(element)).flat();
+    if (!myData.includes(req.body.username)) {
+      res.send(false);
+      return;
+    }
+    db.getUserInfo(req.body.username, (err, data) => {
+      if (err) throw err;
+      var boolean = bcrypt.compareSync(req.body.password, data[0].password);
+      boolean
+        ? jwt.sign(
+            {
+              username: req.body.username,
+              password: data[0].password,
+            },
+            "privatekey",
+            {
+              expiresIn: "1h",
+            },
+            (err, token) => {
+              err ? console.log(err) : res.status(200).json({ token: token });
+              db.saveUserToken(req.body.username, token, (err, data) => {
+                if (err) throw err;
+                console.log(data);
+              });
+            }
+          )
+        : res.send(false);
+    });
   });
 });
+
 app.post("/addCompany", (req, res) => {
   var array = [req.body.name, hash(req.body.password)];
   db.addCompany(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
 });
-app.post("/loginCompanies", (req, res) => {
-  db.logCompanies(req.body.name, (err, data) => {
-    if (err) throw err;
 
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      name: req.body.name,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveCompToken(req.body.name, token, (err, data) => {
-              if (err) throw err;
-              console.log("token saved");
-            });
-          }
-        )
-      : res.send({ err });
+app.post("/loginCompanies", (req, res) => {
+  db.companyName((err, data) => {
+    if (err) throw err;
+    myData = data.map((element) => Object.values(element)).flat();
+    if (!myData.includes(req.body.name)) {
+      res.send(false);
+      return;
+    }
+    db.logCompanies(req.body.name, (err, data) => {
+      if (err) throw err;
+      var boolean = bcrypt.compareSync(req.body.password, data[0].password);
+      boolean
+        ? jwt.sign(
+            {
+              username: req.body.name,
+              password: data[0].password,
+            },
+            "privatekey",
+            {
+              expiresIn: "1h",
+            },
+            (err, token) => {
+              err ? console.log(err) : res.status(200).json({ token: token });
+              db.saveCompToken(req.body.name, token, (err, data) => {
+                if (err) throw err;
+                console.log(data);
+              });
+            }
+          )
+        : res.send(false);
+    });
   });
 });
+
 app.post("/addTC", (req, res) => {
   var array = [req.body.name, hash(req.body.password)];
   db.addTC(array, (err, data) => {
@@ -342,35 +352,39 @@ app.post("/addTC", (req, res) => {
 });
 
 app.post("/loginTC", (req, res) => {
-  db.logTC(req.body.name, (err, data) => {
+  db.checkTcName((err, data) => {
     if (err) throw err;
-
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      name: req.body.name,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveTcToken(req.body.name, token, (err, data) => {
-              if (err) throw err;
-              console.log("token saved");
-            });
-          }
-        )
-      : res.send({ err });
+    myData = data.map((element) => Object.values(element)).flat();
+    if (!myData.includes(req.body.name)) {
+      res.send(false);
+      return;
+    }
+    db.logTC(req.body.name, (err, data) => {
+      if (err) throw err;
+      var boolean = bcrypt.compareSync(req.body.password, data[0].password);
+      boolean
+        ? jwt.sign(
+            {
+              username: req.body.name,
+              password: data[0].password,
+            },
+            "privatekey",
+            {
+              expiresIn: "1h",
+            },
+            (err, token) => {
+              err ? console.log(err) : res.status(200).json({ token: token });
+              db.saveTcToken(req.body.name, token, (err, data) => {
+                if (err) throw err;
+                console.log(data);
+              });
+            }
+          )
+        : res.send(false);
+    });
   });
 });
+
 ////////////////// ADD TOKENS TO DATABASE //////////////
 app.post("/api/users/studentToken", (req, res) => {
   db.selectUserByToken(req.body.token, (err, data) => {
@@ -429,182 +443,6 @@ app.post("/api/users/findProfil", (req, res) => {
     } else {
       res.send(`user dosen't exist`);
     }
-  });
-});
-
-app.get("/api/users/getNonVerifiedCenters", async (req, res) => {
-  try {
-    const requests = await db.getNonVerifiedCenters();
-    res.status(200).send(requests);
-  } catch (err) {
-    console.error(err);
-  }
-});
-
-app.post("/api/users/getUsersatate", (req, res) => {
-  console.log(req.body);
-  db.getUserStatus(req.body.username, (err, data) => {
-    if (err) throw err;
-    res.status(200).send(data);
-  });
-});
-
-app.post("/api/users/getCompanysatate", (req, res) => {
-  console.log(req.body);
-  db.getCompanyStatus(req.body.name, (err, data) => {
-    if (err) throw err;
-    res.status(200).send(data);
-  });
-});
-
-app.post("/api/users/getCentersatate", (req, res) => {
-  console.log(req.body);
-  db.getCenterStatus(req.body.name, (err, data) => {
-    if (err) throw err;
-    res.status(200).send(data);
-  });
-});
-
-app.post("/addStudents", (req, res) => {
-  console.log(req.body);
-  var arr = [
-    req.body.username,
-    req.body.secretinfo,
-    hash(req.body.password),
-    req.body.email,
-  ];
-  db.addStudent(arr, (err, data) => {
-    if (err) throw err;
-
-    res.send(`${req.body.username} added succsesfully`);
-  });
-});
-
-app.post("/login", (req, res) => {
-  db.getUserInfo(req.body.username, (err, data) => {
-    if (err) throw err;
-
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      username: req.body.username,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveUserToken(req.body.username, token, (err, data) => {
-              if (err) throw err;
-              console.log("token saved");
-            });
-          }
-        )
-      : res.send({ err });
-  });
-});
-app.post("/addCompany", (req, res) => {
-  var array = [req.body.name, hash(req.body.password)];
-  db.addCompany(array, (err, data) => {
-    err ? console.log(err) : res.send(data);
-  });
-});
-app.post("/loginCompanies", (req, res) => {
-  db.logCompanies(req.body.name, (err, data) => {
-    if (err) throw err;
-
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      name: req.body.name,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveCompToken(req.body.name, token, (err, data) => {
-              if (err) throw err;
-              console.log("token saved");
-            });
-          }
-        )
-      : res.send({ err });
-  });
-});
-app.post("/addTC", (req, res) => {
-  var array = [req.body.name, hash(req.body.password)];
-  db.addTC(array, (err, data) => {
-    err ? console.log(err) : res.send(data);
-  });
-});
-
-app.post("/loginTC", (req, res) => {
-  db.logTC(req.body.name, (err, data) => {
-    if (err) throw err;
-
-    console.log(data[0].password);
-    var boolean = bcrypt.compareSync(req.body.password, data[0].password);
-    var obj = {
-      name: req.body.name,
-      password: data[0].password,
-    };
-    boolean
-      ? jwt.sign(
-          {
-            obj,
-          },
-          "privatekey",
-          {
-            expiresIn: "1h",
-          },
-          (err, token) => {
-            err ? console.log(err) : res.status(200).json({ token: token });
-            db.saveTcToken(req.body.name, token, (err, data) => {
-              if (err) throw err;
-              console.log("token saved");
-            });
-          }
-        )
-      : res.send({ err });
-  });
-});
-
-app.post("/api/users/studentToken", (req, res) => {
-  db.selectUserByToken(req.body.token, (err, data) => {
-    if (err) throw err;
-    console.log("token saved");
-    res.send(data);
-  });
-});
-
-app.post("/api/users/companyToken", (req, res) => {
-  db.selectCompanyByToken(req.body.token, (err, data) => {
-    if (err) throw err;
-    console.log("token saved");
-    res.send(data);
-  });
-});
-
-app.post("/api/users/TcToken", (req, res) => {
-  db.selectTcByToken(req.body.token, (err, data) => {
-    if (err) throw err;
-    console.log("token saved");
-    res.send(data);
   });
 });
 
@@ -921,6 +759,27 @@ app.get("/api/adminReports", (req, res) => {
   db.getReportsFromUser((err, data) => {
     if (err) throw err;
     res.send(data);
+  });
+});
+
+app.get("/api/users/coach", (req, res) => {
+  db.getCoaches((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.post("/api/addCoach", (req, res) => {
+  var coach = [
+    req.body.fullName,
+    req.body.diplome,
+    req.body.experience,
+    req.body.about,
+    req.body.email,
+    req.body.number,
+  ];
+  db.addCoach(coach, (err, data) => {
+    err ? console.log(err) : res.send(data);
   });
 });
 
