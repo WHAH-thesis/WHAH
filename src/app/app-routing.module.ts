@@ -40,6 +40,10 @@ import { ReportsToAdminComponent } from "./reports-to-admin/reports-to-admin.com
 import { AdminReportComponent } from "./admin-report/admin-report.component";
 import { ReportComponent } from "./report/report.component";
 import { AdminReportsComponent } from "./admin-reports/admin-reports.component";
+import { AdminTreesComponent } from './admin-trees/admin-trees.component';
+import { StudentsTreesComponent } from './students-trees/students-trees.component';
+import { AdminAddCoachComponent } from './admin-add-coach/admin-add-coach.component';
+import { CoachListComponent } from './coach-list/coach-list.component';
 
 const routes: Routes = [
   { path: "register/student", component: VerficationComponent },
@@ -94,7 +98,10 @@ const routes: Routes = [
   { path: "AdminReport", component: AdminReportComponent },
   { path: "report/post", component: ReportComponent },
   { path: "report/admin", component: AdminReportsComponent },
-
+  { path: "tree/admin", component: AdminTreesComponent },
+  { path: "tree", component: StudentsTreesComponent },
+  { path : "admin/addCoach" , component: AdminAddCoachComponent},
+  { path : "users/coachList", component: CoachListComponent}
 ];
 
 @NgModule({

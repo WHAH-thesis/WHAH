@@ -267,4 +267,34 @@ export class HttpService {
   getCoaches() {
     return this.http.get(this.ROOT_URL + "/api/users/coach");
   }
+    //////////////////////////// Add tree ////////////
+    addTree(obj) {
+      return this.http.post(this.ROOT_URL + "/api/addTree", obj);
+    }
+    ////////////////////////// GET ALL trees /////////////////////////////////
+    getTrees() {
+      return this.http.get(this.ROOT_URL + "/api/users/trees");
+    }
+
+     //////////////////////////// Add path ////////////
+     addPath(obj) {
+      return this.http.post(this.ROOT_URL + "/api/addPath", obj);
+    }
+    ////////////////////////// GET ALL paths /////////////////////////////////
+    getPaths() {
+      return this.http.get(this.ROOT_URL + "/api/users/paths");
+    }   
+     //////////////////////////// get relations ////////////
+     getJoin(obj) {
+      return this.http.post(this.ROOT_URL + "/api/users/relation", obj);
+    }
+     //////////////////////////// Add relation ////////////
+     addrelation(obj) {
+      return this.http.post(this.ROOT_URL + "/api/addRelation", obj);
+    }
+
+    getPathByName(obj) {
+      return this.http.post(this.ROOT_URL + "/api/users/onePaths", obj);
+    }
+
 }
