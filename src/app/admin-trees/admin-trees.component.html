@@ -1,0 +1,370 @@
+<div style="width: 100%; display: table">
+  <div style="display: table-row; height: 100px">
+    <div style="width: 40%; display: table-cell">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Job</label>
+          <input
+            type="text"
+            #job
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">field</label>
+          <input
+            type="text"
+            #field
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="treesInfo(job.value, field.value)"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div style="display: table-cell; width: 40%; margin-left: 60%">
+      <form>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Example select</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option *ngFor="let element of trees">
+              {{ this.element?.job }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div style="width: 100%; display: table">
+  <div style="display: table-row; height: 100px">
+    <div style="width: 50%; display: table-cell">
+      <form>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Path name</label>
+          <input
+            #name
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step1</label>
+          <input
+            #step1
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description1</label>
+          <textarea
+            #description1
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step2</label>
+          <input
+            #step2
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description2
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step3</label>
+          <input
+            #step3
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description3
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step4
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description4
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step5
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description5
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step6
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description6
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step7
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description7
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step8
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description8
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step9
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description9
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">step</label>
+          <input
+            #step10
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            #description10
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="
+            pathsInfo(
+              name.value,
+              step1.value,
+              step2.value,
+              step3.value,
+              step4.value,
+              step5.value,
+              step6.value,
+              step7.value,
+              step8.value,
+              step9.value,
+              step10.value,
+              description1.value,
+              description2.value,
+              description3.value,
+              description4.value,
+              description5.value,
+              description6.value,
+              description7.value,
+              description8.value,
+              description9.value,
+              description10.value
+            )
+          "
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div style="display: table-cell">
+      <form>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Example select</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option *ngFor="let element of paths">
+              {{ this.element?.name }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div style="width: 100%; display: table">
+  <div style="display: table-row; height: 100px">
+    <div style="width: 50%; display: table-cell">
+      <div style="width: 100%; display: table">
+        <div style="display: table-row; height: 100px">
+          <div style="width: 50%; display: table-cell">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">name of path</label>
+              <select
+                #val1
+                (change)="addp(val1.value)"
+                class="form-control"
+                id="exampleFormControlSelect1"
+              >
+                <option *ngFor="let element of paths">
+                  {{ this.element?.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div style="display: table-cell">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">name of tree</label>
+              <select
+                #val
+                (change)="addt(val.value)"
+                class="form-control"
+                id="exampleFormControlSelect1"
+              >
+                <option *ngFor="let element of trees">
+                  {{ this.element?.job }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="joinInfo()">
+        Submit
+      </button>
+    </div>
+    <div style="display: table-cell">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">name of tree</label>
+            <select
+              #va
+              (change)="displaytree(va.value)"
+
+              class="form-control"
+              id="exampleFormControlSelect1"
+            >
+              <option *ngFor="let element of trees">
+                {{ this.element?.job }}
+              </option>
+            </select>
+          </div>
+    
+    </div>
+  </div>
+</div>
+

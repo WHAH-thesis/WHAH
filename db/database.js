@@ -174,9 +174,10 @@ const addStudent = (arr, callback) => {
   });
 };
 
-const getUserInfo = (username ,callback) => {
+const getUserInfo = (username, callback) => {
   let sql = `select password from students where username = '${username}' or email = '${username}'`;
-  connection.query(sql,(err, data) => {
+  connection.query(sql, (err, data) => {
+
     if (err) throw callback(err);
     callback(null, data);
   });
@@ -188,8 +189,7 @@ const usernameAndEmail = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
-
+};
 
 
 const addCompany = (arr, callback) => {
@@ -205,7 +205,7 @@ const companyName = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
+};
 
 
 const logCompanies = (name, callback) => {
@@ -228,7 +228,7 @@ const checkTcName = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
+};
 
 
 const logTC = (name, callback) => {
@@ -241,7 +241,8 @@ const logTC = (name, callback) => {
 
 const getUserStatus = (username, callback) => {
   let sql = `select * from students where username = '${username}' or email = '${username}'`;
-  connection.query(sql,  (err, data) => {
+  connection.query(sql, (err, data) => {
+
     if (err) throw callback(err, null);
     callback(null, data);
   });
@@ -624,7 +625,6 @@ const changeMembershipToGold = (arr, callback) => {
 const userReports = (arr, callback) => {
   let sql = `insert into feedbacks (username ,typeOfUser, message) values (?,?,?)`;
   connection.query(sql, arr, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -636,7 +636,6 @@ const userReports = (arr, callback) => {
 //get the reports for the admin
 const getReports = (callback) => {
   connection.query("select * from feedbacks", (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -649,7 +648,6 @@ const getReports = (callback) => {
 const delOneReport = (id, callback) => {
   let sql = `DELETE FROM feedbacks WHERE id = '${id}'`;
   connection.query(sql, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -661,7 +659,6 @@ const delOneReport = (id, callback) => {
 //delete all report for the admin
 const delAllReports = (callback) => {
   connection.query(`TRUNCATE TABLE feedbacks`, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -678,6 +675,7 @@ const reportSt = (arr, callback) => {
   });
 };
 
+
 const getReportsFromUser = (callback) => {
   let sql = `select * from reports `;
   connection.query(sql, (err, data) => {
@@ -689,7 +687,120 @@ const getReportsFromUser = (callback) => {
   });
 };
 
+const addCoach = (arr, callback) => {
+  let sql = `insert into coach (fullName ,image ,  diplome , experience , about,email,number) values (?,?,?,?,?,?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+
+const getCoaches = (callback) => {
+  let sql = `select * from coach `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+
+// POST A NEW TREE 
+const addTree = (arr, callback) => {
+  let sql = `insert into trees (job , field ) values (?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ 
+
+// get all the trees 
+const getTrees = (callback) => {
+  let sql = `select * from trees  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+
+// POST A NEW PATH
+const addPath = (arr, callback) => {
+  let sql = `insert into paths (name , stepOne , descOne , stepTwo ,descTwo , stepThree , descThree , stepFour , descFour , stepFive , descFive , stepSix , descSix , stepSeven , descSeven ,stepEight ,descEight , stepNine , descNine , stepTen , descTen ) values (? , ? , ? , ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ,? ,? , ? , ? , ? , ? )`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ // get all the PATHS 
+
+const getPaths = (callback) => {
+  let sql = `select * from paths  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+// get the PATHS by name
+
+const pathsName = (pathName, callback) => {
+  let sql = `select * from paths where name = '${pathName}'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+
+
+
+
+// POST A NEW relation  
+const addrelation = (arr, callback) => {
+  let sql = `insert into relations (treeName , pathName ) values (?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ 
+
+// get all the relations  
+const getJoin = (tree , callback) => {
+  let sql = `select * from relations WHERE treeName="${tree}"  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+
 module.exports = {
+  pathsName,
+  getJoin,
+  addrelation,
+  getPaths,
+  addPath,
+  getTrees,
+  addTree,
+  getCoaches,
+  addCoach,
   usernameAndEmail,
   getReportsFromUser,
   reportSt,
@@ -762,3 +873,5 @@ module.exports = {
   getCenterStatus,
   getPosts,
 };
+
+
