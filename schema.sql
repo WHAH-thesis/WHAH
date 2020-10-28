@@ -111,6 +111,7 @@ CREATE TABLE coach (
 id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 fullName VARCHAR(50) ,
 image VARCHAR(100) ,
+
 diplome VARCHAR(50) ,
 experience VARCHAR(250),
 about VARCHAR(1000) , 
@@ -153,4 +154,5 @@ CREATE TABLE relations (
   treeName VARCHAR(30) ,
   pathName VARCHAR(30)
 );
+
 

@@ -689,6 +689,7 @@ const getReportsFromUser = (callback) => {
 
 const addCoach = (arr, callback) => {
   let sql = `insert into coach (fullName ,image ,  diplome , experience , about,email,number) values (?,?,?,?,?,?,?)`;
+
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
@@ -799,11 +800,13 @@ module.exports = {
   addPath,
   getTrees,
   addTree,
+
   getCoaches,
   addCoach,
   usernameAndEmail,
   getReportsFromUser,
   reportSt,
+
   delAllReports,
   delOneReport,
   getReports,

@@ -773,11 +773,13 @@ app.post("/api/addCoach", (req, res) => {
   var coach = [
     req.body.fullName,
     req.body.image , 
+
     req.body.diplome,
     req.body.experience,
     req.body.about,
     req.body.email,
     req.body.number
+
   ];
   db.addCoach(coach, (err, data) => {
     err ? console.log(err) : res.send(data);
@@ -861,5 +863,6 @@ app.post("/api/addRelation", (req, res) => {
     err ? console.log(err) : res.send(data);
   });
 });
+
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
