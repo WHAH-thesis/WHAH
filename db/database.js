@@ -177,6 +177,7 @@ const addStudent = (arr, callback) => {
 const getUserInfo = (username, callback) => {
   let sql = `select password from students where username = '${username}' or email = '${username}'`;
   connection.query(sql, (err, data) => {
+
     if (err) throw callback(err);
     callback(null, data);
   });
@@ -189,6 +190,7 @@ const usernameAndEmail = (callback) => {
     callback(null, data);
   });
 };
+
 
 const addCompany = (arr, callback) => {
   let sql = "insert into companies (name,password) values(?,?)";
@@ -204,6 +206,7 @@ const companyName = (callback) => {
     callback(null, data);
   });
 };
+
 
 const logCompanies = (name, callback) => {
   let sql = `select password from companies where name = ?`;
@@ -227,6 +230,7 @@ const checkTcName = (callback) => {
   });
 };
 
+
 const logTC = (name, callback) => {
   let sql = `select password from trainingCenters where name = ?`;
   connection.query(sql, name, (err, data) => {
@@ -238,6 +242,7 @@ const logTC = (name, callback) => {
 const getUserStatus = (username, callback) => {
   let sql = `select * from students where username = '${username}' or email = '${username}'`;
   connection.query(sql, (err, data) => {
+
     if (err) throw callback(err, null);
     callback(null, data);
   });
@@ -313,6 +318,7 @@ const selectTcByToken = (token, callback) => {
 ////////////////////////////////////////////
 
 /////////////////////////////////////////////////
+
 
 const updateUser = (username, obj, callback) => {
   var arr = Object.keys(obj);
@@ -669,6 +675,7 @@ const reportSt = (arr, callback) => {
   });
 };
 
+
 const getReportsFromUser = (callback) => {
   let sql = `select * from reports `;
   connection.query(sql, (err, data) => {
@@ -704,6 +711,7 @@ module.exports = {
   usernameAndEmail,
   getReportsFromUser,
   reportSt,
+
   delAllReports,
   delOneReport,
   getReports,

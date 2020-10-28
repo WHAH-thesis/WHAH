@@ -21,6 +21,7 @@ export class HttpService {
   //////////////// LOG IN /////////////////////////
   loginStudent(obj) {
     return this.http.post(this.ROOT_URL + "/login", obj);
+
   }
   loginCompanies(data) {
     return this.http.post(this.ROOT_URL + "/loginCompanies", data);
