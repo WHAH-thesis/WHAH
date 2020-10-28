@@ -174,9 +174,10 @@ const addStudent = (arr, callback) => {
   });
 };
 
-const getUserInfo = (username ,callback) => {
+const getUserInfo = (username, callback) => {
   let sql = `select password from students where username = '${username}' or email = '${username}'`;
-  connection.query(sql,(err, data) => {
+  connection.query(sql, (err, data) => {
+
     if (err) throw callback(err);
     callback(null, data);
   });
@@ -188,8 +189,7 @@ const usernameAndEmail = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
-
+};
 
 
 const addCompany = (arr, callback) => {
@@ -205,7 +205,7 @@ const companyName = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
+};
 
 
 const logCompanies = (name, callback) => {
@@ -228,7 +228,7 @@ const checkTcName = (callback) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
-}
+};
 
 
 const logTC = (name, callback) => {
@@ -241,7 +241,8 @@ const logTC = (name, callback) => {
 
 const getUserStatus = (username, callback) => {
   let sql = `select * from students where username = '${username}' or email = '${username}'`;
-  connection.query(sql,  (err, data) => {
+  connection.query(sql, (err, data) => {
+
     if (err) throw callback(err, null);
     callback(null, data);
   });
@@ -624,7 +625,6 @@ const changeMembershipToGold = (arr, callback) => {
 const userReports = (arr, callback) => {
   let sql = `insert into feedbacks (username ,typeOfUser, message) values (?,?,?)`;
   connection.query(sql, arr, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -636,7 +636,6 @@ const userReports = (arr, callback) => {
 //get the reports for the admin
 const getReports = (callback) => {
   connection.query("select * from feedbacks", (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -649,7 +648,6 @@ const getReports = (callback) => {
 const delOneReport = (id, callback) => {
   let sql = `DELETE FROM feedbacks WHERE id = '${id}'`;
   connection.query(sql, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -661,7 +659,6 @@ const delOneReport = (id, callback) => {
 //delete all report for the admin
 const delAllReports = (callback) => {
   connection.query(`TRUNCATE TABLE feedbacks`, (err, data) => {
-
     if (err) {
       callback(err);
     } else {
@@ -669,7 +666,6 @@ const delAllReports = (callback) => {
     }
   });
 };
-<<<<<<< HEAD
 
 const reportSt = (arr, callback) => {
   let sql = `insert into reports (name , reason , comment , postId) values (?,?,? ,?)`;
@@ -679,17 +675,7 @@ const reportSt = (arr, callback) => {
   });
 };
 
-=======
 
-const reportSt = (arr, callback) => {
-  let sql = `insert into reports (name , reason , comment , postId) values (?,?,? ,?)`;
-  connection.query(sql, arr, (err, data) => {
-    if (err) throw callback(err, null);
-    callback(null, data);
-  });
-};
-
->>>>>>> 5988e0bb2eba912106f48036b2325732a900d526
 const getReportsFromUser = (callback) => {
   let sql = `select * from reports `;
   connection.query(sql, (err, data) => {
@@ -701,16 +687,31 @@ const getReportsFromUser = (callback) => {
   });
 };
 
-module.exports = {
-<<<<<<< HEAD
-  getReportsFromUser,
-  reportSt,
+const addCoach = (arr, callback) => {
+  let sql = `insert into coach (fullName , diplome , experience , about,email,number) values (?,?,? ,?,?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
 
-=======
+const getCoaches = (callback) => {
+  let sql = `select * from coach `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+module.exports = {
+  getCoaches,
+  addCoach,
   usernameAndEmail,
   getReportsFromUser,
   reportSt,
->>>>>>> 5988e0bb2eba912106f48036b2325732a900d526
+
   delAllReports,
   delOneReport,
   getReports,

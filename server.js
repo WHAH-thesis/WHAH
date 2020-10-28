@@ -762,4 +762,25 @@ app.get("/api/adminReports", (req, res) => {
   });
 });
 
+app.get("/api/users/coach", (req, res) => {
+  db.getCoaches((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
+app.post("/api/addCoach", (req, res) => {
+  var coach = [
+    req.body.fullName,
+    req.body.diplome,
+    req.body.experience,
+    req.body.about,
+    req.body.email,
+    req.body.number,
+  ];
+  db.addCoach(coach, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+
 app.listen(port, () => console.log(`server is listening on port ${port}`));
