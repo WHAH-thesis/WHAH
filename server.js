@@ -864,5 +864,18 @@ app.post("/api/addRelation", (req, res) => {
   });
 });
 
+////////////// POST AND GET COMMENT POST/////////////
+app.post('/users/addComment', (req, res)=>{
+  var msg = [req.body.postId ,req.body.username ,req.body.postsText ,req.body.imgUrl]
+  db.postComments(msg,  (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+app.post('/users/getComment', (req, res)=>{
+  db.getCommentsById(req.body.postId, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));

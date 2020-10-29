@@ -791,8 +791,30 @@ const getJoin = (tree , callback) => {
   });
 };
 
+////////////// POST AND GET COMMENT POST/////////////
+const postComments = (arr, callback)=>{
+  let sql = `insert into comments (postId, username, postsText, imgUrl) values(?,?,?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+const getCommentsById = (id, callback) => {
+  let sql = `select * from comments where postId = ${id}`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
 
 module.exports = {
+  getCommentsById,
+  postComments,
   pathsName,
   getJoin,
   addrelation,

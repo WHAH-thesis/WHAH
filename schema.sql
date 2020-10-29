@@ -155,4 +155,12 @@ CREATE TABLE relations (
   pathName VARCHAR(30)
 );
 
+CREATE TABLE comments (
+  id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  postId INT(4),
+  username VARCHAR(30),
+  postsText VARCHAR(255),
+  imgUrl VARCHAR(150)
+);
+
 

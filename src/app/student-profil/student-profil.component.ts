@@ -23,6 +23,7 @@ export class StudentProfilComponent implements OnInit {
     // get all data for user
     this._http.userProfil(obj).subscribe((res) => {
       this.userData = res[0];
+      this.local.user = {image : this.userData.profilePic , name : this.userData.firstname}
     });
   }
   navToEdit() {
@@ -39,7 +40,7 @@ export class StudentProfilComponent implements OnInit {
   takeMeToReports(){
     this.router.navigateByUrl('sendReport')
   }
-  // feed(){
-  //   this.router.navigateByUrl('/feed/student');
-  // }
+  feed(){
+    this.router.navigateByUrl('/feed/student');
+  }
 }

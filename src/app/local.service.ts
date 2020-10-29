@@ -19,6 +19,7 @@ export class LocalService {
   post: any;
   // reported post data
   reported: any;
-
+  // data of user 
+  user : any ; 
   constructor() {}
 }
