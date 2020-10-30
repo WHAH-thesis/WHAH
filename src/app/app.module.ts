@@ -49,6 +49,10 @@ import { ReportsToAdminComponent } from './reports-to-admin/reports-to-admin.com
 import { AdminReportComponent } from './admin-report/admin-report.component';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { ReportComponent } from './report/report.component';
+import { AdminTreesComponent } from './admin-trees/admin-trees.component';
+import { StudentsTreesComponent } from './students-trees/students-trees.component';
+import { AdminAddCoachComponent } from './admin-add-coach/admin-add-coach.component';
+import { CoachListComponent } from './coach-list/coach-list.component';
 
 
 @NgModule({
@@ -94,6 +98,10 @@ import { ReportComponent } from './report/report.component';
     AdminReportComponent,
     AdminReportsComponent,
     ReportComponent,
+    AdminTreesComponent,
+    StudentsTreesComponent,
+    AdminAddCoachComponent,
+    CoachListComponent,
 
   ],
   imports: [

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalService } from '../local.service';
 import { Router } from '@angular/router';
+import { HttpService } from "../http.service";
 
 @Component({
   selector: 'app-post',
@@ -8,10 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  constructor(private local: LocalService, private router: Router) {}
+  constructor(private _http: HttpService,private local: LocalService, private router: Router) {}
   post: any;
+  comments : any ;
   ngOnInit(): void {
     // get one post
     this.post = this.local.onePost;
+    console.log(this.local.user)
+    var obj = {postId : this.local.onePost.id}
+    this._http.getcomment(obj).subscribe((data)=>{
+      console.log(data)
+      this.comments = data 
+    })
+  }
+  comment(comment){
+    var obj = { postId : this.local.onePost.id , username:this.local.user.name , postsText : comment ,  imgUrl:this.local.user.image } 
+   this._http.addcomment(obj).subscribe((data)=>{
+     this.ngOnInit() 
+   })
   }
 }

@@ -688,7 +688,8 @@ const getReportsFromUser = (callback) => {
 };
 
 const addCoach = (arr, callback) => {
-  let sql = `insert into coach (fullName , diplome , experience , about,email,number) values (?,?,? ,?,?,?)`;
+  let sql = `insert into coach (fullName ,image ,  diplome , experience , about,email,number) values (?,?,?,?,?,?,?)`;
+
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
@@ -705,7 +706,149 @@ const getCoaches = (callback) => {
     }
   });
 };
+
+
+// POST A NEW TREE 
+const addTree = (arr, callback) => {
+  let sql = `insert into trees (job , field ) values (?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ 
+
+// get all the trees 
+const getTrees = (callback) => {
+  let sql = `select * from trees  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+
+// POST A NEW PATH
+const addPath = (arr, callback) => {
+  let sql = `insert into paths (name , stepOne , descOne , stepTwo ,descTwo , stepThree , descThree , stepFour , descFour , stepFive , descFive , stepSix , descSix , stepSeven , descSeven ,stepEight ,descEight , stepNine , descNine , stepTen , descTen ) values (? , ? , ? , ? ,? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ,? ,? , ? , ? , ? , ? )`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ // get all the PATHS 
+
+const getPaths = (callback) => {
+  let sql = `select * from paths  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+// get the PATHS by name
+
+const pathsName = (pathName, callback) => {
+  let sql = `select * from paths where name = '${pathName}'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+
+
+
+
+// POST A NEW relation  
+const addrelation = (arr, callback) => {
+  let sql = `insert into relations (treeName , pathName ) values (?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
+ 
+
+// get all the relations  
+const getJoin = (tree , callback) => {
+  let sql = `select * from relations WHERE treeName="${tree}"  `;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+////////////// POST AND GET COMMENT POST/////////////
+const postComments = (arr, callback)=>{
+  let sql = `insert into comments (postId, username, postsText, imgUrl) values(?,?,?,?)`;
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+const getCommentsById = (id, callback) => {
+  let sql = `select * from comments where postId = ${id}`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//check existing username in singUp students
+const checkExistingUsername = (username, callback) =>{
+  let sql = `select username from students where username like '${username}%'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//check username in singUp students
+const checkUsername = (username , callback) => {
+  let sql = `select username from students where username = '${username}'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+
 module.exports = {
+  checkUsername,
+  checkExistingUsername,
+  getCommentsById,
+  postComments,
+  pathsName,
+  getJoin,
+  addrelation,
+  getPaths,
+  addPath,
+  getTrees,
+  addTree,
+
   getCoaches,
   addCoach,
   usernameAndEmail,
@@ -781,3 +924,5 @@ module.exports = {
   getCenterStatus,
   getPosts,
 };
+
+

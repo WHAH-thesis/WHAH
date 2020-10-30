@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { element } = require("protractor");
 
 const hash = (pass) => bcrypt.hashSync(pass, 10);
 
@@ -772,15 +773,127 @@ app.get("/api/users/coach", (req, res) => {
 app.post("/api/addCoach", (req, res) => {
   var coach = [
     req.body.fullName,
+    req.body.image , 
+
     req.body.diplome,
     req.body.experience,
     req.body.about,
     req.body.email,
-    req.body.number,
+    req.body.number
+
   ];
   db.addCoach(coach, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
 });
+
+////////////////////// get all the trees ///////////////////////
+app.get("/api/users/trees", (req, res) => {
+  db.getTrees((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+////////////////////// POST A NEW  tree ///////////////////////
+
+app.post("/api/addTree", (req, res) => {
+  var coach = [req.body.job, req.body.field];
+  db.addTree(coach, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+////////////////////// get all the paths ///////////////////////
+
+app.get("/api/users/paths", (req, res) => {
+  db.getPaths((err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+////////////////////// POST A NEW  path ///////////////////////
+
+app.post("/api/addPath", (req, res) => {
+  var path = [
+    req.body.name,
+    req.body.stepOne,
+    req.body.descOne,
+    req.body.stepTwo,
+    req.body.descTwo,
+    req.body.stepThree,
+    req.body.descThree,
+    req.body.stepFour,
+    req.body.descFour,
+    req.body.stepFive,
+    req.body.descFive,
+    req.body.stepSix,
+    req.body.descSix,
+    req.body.stepSeven,
+    req.body.descSeven,
+    req.body.stepEight,
+    req.body.descEight,
+    req.body.stepNine,
+    req.body.descNine,
+    req.body.stepTen,
+    req.body.descTen,
+  ];
+  db.addPath(path, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+
+//////////////////////  get the PATHS by name //////////////////////
+
+app.post("/api/users/onePaths", (req, res) => {
+  db.pathsName(req.body.pathName, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+
+////////////////////// get all the relations ///////////////////////
+app.post("/api/users/relation", (req, res) => {
+  db.getJoin(req.body.treeName, (err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+});
+////////////////////// POST A NEW  relation ///////////////////////
+
+app.post("/api/addRelation", (req, res) => {
+  var relation = [req.body.treeName, req.body.pathName];
+  db.addrelation(relation, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  });
+});
+
+////////////// POST AND GET COMMENT POST/////////////
+app.post('/users/addComment', (req, res)=>{
+  var msg = [req.body.postId ,req.body.username ,req.body.postsText ,req.body.imgUrl]
+  db.postComments(msg,  (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+app.post('/users/getComment', (req, res)=>{
+  db.getCommentsById(req.body.postId, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
+//check username in singUp students
+
+app.post('/users/checkExistingNames', (req, res)=>{
+  db.checkExistingUsername(req.body.username, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
+//check username in singUp students
+app.post('/users/checkNames', (req, res)=>{
+  db.checkUsername(req.body.username, (err, data)=>{
+    if (err) throw err;
+    var usernames = data.map(element => Object.values(element)).flat()
+    res.send(usernames.includes(req.body.username))
+  })
+})
+
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));
