@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpService } from '../http.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-landing',
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private _http: HttpService, private router: Router) {}
   ngOnInit(): void {}
   ////////////////////////// redirect user ////////////////////////////////
   student() {
@@ -27,5 +29,15 @@ export class LandingComponent implements OnInit {
   }
   centerl() {
     this.router.navigateByUrl('/signin/center');
+  }
+  submitForm(username, typeOfUser, message) {
+    let obj = { username, typeOfUser, message };
+    console.log(obj);
+    if (!obj.message) {
+      alert('your msg please');
+      return;
+    }
+    this._http.usersReport(obj).subscribe((data) => {});
+    alert("thanks for your message'A CHANGER'");
   }
 }

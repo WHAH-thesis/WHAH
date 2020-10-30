@@ -304,4 +304,11 @@ export class HttpService {
   getcomment(obj) {
     return this.http.post(this.ROOT_URL + '/users/getComment', obj);
   }
+  //check username in singUp students
+  checkExistingNames(obj) {
+    return this.http.post(this.ROOT_URL + '/users/checkExistingNames', obj);
+  }
+  checkuserNames(obj) {
+    return this.http.post(this.ROOT_URL + '/users/checkNames', obj);
+  }
 }

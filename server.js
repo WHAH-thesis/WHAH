@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { element } = require("protractor");
 
 const hash = (pass) => bcrypt.hashSync(pass, 10);
 
@@ -874,6 +875,23 @@ app.post('/users/addComment', (req, res)=>{
 app.post('/users/getComment', (req, res)=>{
   db.getCommentsById(req.body.postId, (err, data) => {
     err ? console.log(err) : res.send(data);
+  })
+})
+
+//check username in singUp students
+
+app.post('/users/checkExistingNames', (req, res)=>{
+  db.checkExistingUsername(req.body.username, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
+//check username in singUp students
+app.post('/users/checkNames', (req, res)=>{
+  db.checkUsername(req.body.username, (err, data)=>{
+    if (err) throw err;
+    var usernames = data.map(element => Object.values(element)).flat()
+    res.send(usernames.includes(req.body.username))
   })
 })
 
