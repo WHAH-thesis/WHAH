@@ -811,8 +811,35 @@ const getCommentsById = (id, callback) => {
   });
 }
 
+//check existing username in singUp students
+const checkExistingUsername = (username, callback) =>{
+  let sql = `select username from students where username like '${username}%'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//check username in singUp students
+const checkUsername = (username , callback) => {
+  let sql = `select username from students where username = '${username}'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
 
 module.exports = {
+  checkUsername,
+  checkExistingUsername,
+
   getCommentsById,
   postComments,
   pathsName,
