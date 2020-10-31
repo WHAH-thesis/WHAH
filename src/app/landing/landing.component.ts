@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
 import { LocalService } from '../local.service';
+
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -18,6 +19,7 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.local.redirected)
   }
+
   ////////////////////////// redirect user ////////////////////////////////
   student() {
     this.router.navigateByUrl('/signup/student');

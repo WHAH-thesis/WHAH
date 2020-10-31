@@ -310,5 +310,6 @@ export class HttpService {
   }
   checkuserNames(obj) {
     return this.http.post(this.ROOT_URL + '/users/checkNames', obj);
+
   }
 }

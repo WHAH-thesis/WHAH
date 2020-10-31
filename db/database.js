@@ -839,6 +839,7 @@ const checkUsername = (username , callback) => {
 module.exports = {
   checkUsername,
   checkExistingUsername,
+
   getCommentsById,
   postComments,
   pathsName,

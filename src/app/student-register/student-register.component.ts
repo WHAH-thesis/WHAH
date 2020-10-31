@@ -25,6 +25,7 @@ export class StudentRegisterComponent implements OnInit {
     this._http.checkExistingNames(obj).subscribe((data) => {
       this.user = data;
     });
+
   }
   signin() {
     this.router.navigateByUrl('/signin/student');
@@ -47,5 +48,6 @@ export class StudentRegisterComponent implements OnInit {
         alert('name already existing');
       }
     });
+
   }
 }
