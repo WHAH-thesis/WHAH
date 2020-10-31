@@ -43,4 +43,12 @@ export class StudentProfilComponent implements OnInit {
   feed(){
     this.router.navigateByUrl('/feed/student');
   }
+  logOutStudent(){
+    this.local.redirected = false ;
+    console.log(this.local.redirected);
+    localStorage.setItem("token", "");
+    this.router.navigateByUrl("/");
+
+    
+  }
 }
