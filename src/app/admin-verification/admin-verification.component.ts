@@ -1,14 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpService } from "../http.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { LocalService } from '../local.service';
+import { HttpService } from '../http.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-admin-verification",
-  templateUrl: "./admin-verification.component.html",
-  styleUrls: ["./admin-verification.component.css"],
+  selector: 'app-admin-verification',
+  templateUrl: './admin-verification.component.html',
+  styleUrls: ['./admin-verification.component.css'],
 })
 export class AdminVerificationComponent implements OnInit {
-  constructor(private _http: HttpService, private router: Router) {}
+  constructor(
+    private _http: HttpService,
+    private local: LocalService,
+    private router: Router
+  ) {}
   NonValidStudents: any;
   NonValidCompanies: any;
   NonValidCenters: any;
@@ -80,20 +85,21 @@ export class AdminVerificationComponent implements OnInit {
     });
   }
 
- // DISCONNECT 
+  // DISCONNECT
   goback() {
-    this.router.navigateByUrl("/admin/login");
+    this.local.redirected = false;
+    this.router.navigateByUrl('/admin/login');
   }
-  // go to ban users interface 
+  // go to ban users interface
   ban() {
-    this.router.navigateByUrl("/admin/ban");
+    this.router.navigateByUrl('/admin/ban');
   }
-    // go to verification users interface 
+  // go to verification users interface
   verifications() {
-    this.router.navigateByUrl("/admin");
+    this.router.navigateByUrl('/admin');
   }
-    // go to memberships of training centers interface 
+  // go to memberships of training centers interface
   membership() {
-    this.router.navigateByUrl("/admin/update");
+    this.router.navigateByUrl('/admin/update');
   }
 }
