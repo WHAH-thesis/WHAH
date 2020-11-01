@@ -40,11 +40,13 @@ import { ReportsToAdminComponent } from "./reports-to-admin/reports-to-admin.com
 import { AdminReportComponent } from "./admin-report/admin-report.component";
 import { ReportComponent } from "./report/report.component";
 import { AdminReportsComponent } from "./admin-reports/admin-reports.component";
-import { AdminTreesComponent } from './admin-trees/admin-trees.component';
-import { StudentsTreesComponent } from './students-trees/students-trees.component';
-import { AdminAddCoachComponent } from './admin-add-coach/admin-add-coach.component';
-import { CoachListComponent } from './coach-list/coach-list.component';
-import { AuthGuard } from './auth.guard';
+import { AdminTreesComponent } from "./admin-trees/admin-trees.component";
+import { StudentsTreesComponent } from "./students-trees/students-trees.component";
+import { AdminAddCoachComponent } from "./admin-add-coach/admin-add-coach.component";
+import { CoachListComponent } from "./coach-list/coach-list.component";
+import { AuthGuard } from "./auth.guard";
+import { AboutUsComponent } from "./about-us/about-us.component";
+
 
 const routes: Routes = [
   { path: "register/student", component: VerficationComponent },
@@ -52,58 +54,193 @@ const routes: Routes = [
     path: "verification/request/student",
     component: SendRequestforVerificationComponent,
   },
-  { path: "admin", component: AdminVerificationComponent , canActivate: [AuthGuard]},
-  { path: "wait", component: WaitingComponent , canActivate: [AuthGuard]},
-  { path: "", component: LandingComponent  },
-  { path: "register/company", component: CompanyRegisterComponent , canActivate: [AuthGuard]},
-  { path: "register/center", component: TrainingCenterRegisterComponent , canActivate: [AuthGuard]},
+  {
+    path: "admin",
+    component: AdminVerificationComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "wait", component: WaitingComponent, canActivate: [AuthGuard] },
+  { path: "", component: LandingComponent },
+  {
+    path: "register/company",
+    component: CompanyRegisterComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "register/center",
+    component: TrainingCenterRegisterComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: "verification/request/company",
     component: SendRequestCompanyComponent,
-    canActivate: [AuthGuard]},
+    canActivate: [AuthGuard],
+  },
   {
     path: "verification/request/center",
     component: SendRequestCenterComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
-  { path: "signup/student", component: StudentRegisterComponent , canActivate: [AuthGuard]},
-  { path: "signin/student", component: StudentLoginComponent ,canActivate: [AuthGuard]},
-  { path: "signin/company", component: LoginCompaniesComponent , canActivate: [AuthGuard]},
-  { path: "signup/company", component: RegisterCompaniesComponent , canActivate: [AuthGuard]},
-  { path: "signin/center", component: LoginTcComponent , canActivate: [AuthGuard]},
-  { path: "signup/center", component: TcsignupComponent , canActivate: [AuthGuard]},
-  { path: "studentProfile", component: StudentProfilComponent , canActivate: [AuthGuard]},
-  { path: "company/profile", component: ProfileCompanyComponent , canActivate: [AuthGuard]},
-  { path: "center/profile", component: ProfilTcComponent , canActivate: [AuthGuard]},
-  { path: "editStudent", component: EditStudentProfileComponent , canActivate: [AuthGuard]},
-  { path: "resultSearch", component: SearchResultComponent , canActivate: [AuthGuard]},
-  { path: "editCompany", component: CompanyEditComponent , canActivate: [AuthGuard]},
-  { path: "feed", component: FeedComponent , canActivate: [AuthGuard]},
-  { path: "post/center", component: PostCenterComponent , canActivate: [AuthGuard]},
-  { path: "post", component: PostComponent , canActivate: [AuthGuard]},
-  { path: "admin/delete", component: AdminPostsComponent , canActivate: [AuthGuard]},
-  { path: "editTc", component: TrainingCenterEditComponent , canActivate: [AuthGuard]},
-  { path: "post/company", component: PostComapnyComponent , canActivate: [AuthGuard]},
-  { path: "post/center", component: PostCenterComponent , canActivate: [AuthGuard]},
-  { path: "own/posts", component: TcPostsComponent , canActivate: [AuthGuard]},
-  { path: "modify/tc/posts", component: ModifyPostTcComponent , canActivate: [AuthGuard]},
-  { path: "companyOwnPost", component: PostsCompanyProfileComponent , canActivate: [AuthGuard]},
-  { path: "updateCompPost", component: UpdateCompanyPostsComponent , canActivate: [AuthGuard]},
-  { path: "post/center", component: PostCenterComponent , canActivate: [AuthGuard]},
-  { path: "own/posts", component: TcPostsComponent , canActivate: [AuthGuard]},
-  { path: "admin/ban", component: BanUsersComponent , canActivate: [AuthGuard]},
-  { path: "feed/student", component: StudentFeedComponent , canActivate: [AuthGuard]},
-  { path: "notification", component: NotificationComponent , canActivate: [AuthGuard]},
-  { path: "admin/update", component: AdminWeeklyUpdateComponent , canActivate: [AuthGuard]},
+  {
+    path: "signup/student",
+    component: StudentRegisterComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "signin/student",
+    component: StudentLoginComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "signin/company",
+    component: LoginCompaniesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "signup/company",
+    component: RegisterCompaniesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "signin/center",
+    component: LoginTcComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "signup/center",
+    component: TcsignupComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "studentProfile",
+    component: StudentProfilComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "company/profile",
+    component: ProfileCompanyComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "center/profile",
+    component: ProfilTcComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "editStudent",
+    component: EditStudentProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "resultSearch",
+    component: SearchResultComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "editCompany",
+    component: CompanyEditComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "feed", component: FeedComponent, canActivate: [AuthGuard] },
+  {
+    path: "post/center",
+    component: PostCenterComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "post", component: PostComponent, canActivate: [AuthGuard] },
+  {
+    path: "admin/delete",
+    component: AdminPostsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "editTc",
+    component: TrainingCenterEditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "post/company",
+    component: PostComapnyComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "post/center",
+    component: PostCenterComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "own/posts", component: TcPostsComponent, canActivate: [AuthGuard] },
+  {
+    path: "modify/tc/posts",
+    component: ModifyPostTcComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "companyOwnPost",
+    component: PostsCompanyProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "updateCompPost",
+    component: UpdateCompanyPostsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "post/center",
+    component: PostCenterComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "own/posts", component: TcPostsComponent, canActivate: [AuthGuard] },
+  { path: "admin/ban", component: BanUsersComponent, canActivate: [AuthGuard] },
+  {
+    path: "feed/student",
+    component: StudentFeedComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "notification",
+    component: NotificationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "admin/update",
+    component: AdminWeeklyUpdateComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "admin/login", component: LoginAdminComponent },
-  { path: "sendReport", component: ReportsToAdminComponent , canActivate: [AuthGuard]},
-  { path: "AdminReport", component: AdminReportComponent , canActivate: [AuthGuard]},
-  { path: "report/post", component: ReportComponent , canActivate: [AuthGuard]},
-  { path: "report/admin", component: AdminReportsComponent , canActivate: [AuthGuard]},
-  { path: "tree/admin", component: AdminTreesComponent , canActivate: [AuthGuard]},
-  { path: "tree", component: StudentsTreesComponent , canActivate: [AuthGuard]},
-  { path : "admin/addCoach" , component: AdminAddCoachComponent , canActivate: [AuthGuard]},
-  { path : "users/coachList", component: CoachListComponent , canActivate: [AuthGuard]}
+  {
+    path: "sendReport",
+    component: ReportsToAdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "AdminReport",
+    component: AdminReportComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "report/post", component: ReportComponent, canActivate: [AuthGuard] },
+  {
+    path: "report/admin",
+    component: AdminReportsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "tree/admin",
+    component: AdminTreesComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "tree", component: StudentsTreesComponent, canActivate: [AuthGuard] },
+  {
+    path: "admin/addCoach",
+    component: AdminAddCoachComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "users/coachList",
+    component: CoachListComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "aboutUs", component: AboutUsComponent },
+
 ];
 
 @NgModule({

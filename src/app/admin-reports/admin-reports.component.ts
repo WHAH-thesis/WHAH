@@ -22,4 +22,39 @@ export class AdminReportsComponent implements OnInit {
       this.reports = data;
     });
   }
+  // DISCONNECT
+  goback() {
+    this.local.redirected = false;
+
+    this.router.navigateByUrl("/admin/login");
+  }
+  // go to ban users interface
+  ban() {
+    this.router.navigateByUrl("/admin/ban");
+  }
+  // go to verification users interface
+  verf() {
+    this.router.navigateByUrl("/admin");
+  }
+  // go to memberships of training centers interface
+  member() {
+    this.router.navigateByUrl("/admin/update");
+  }
+
+  post() {
+    this.router.navigateByUrl("/admin/delete");
+  }
+  feedback() {
+    this.router.navigateByUrl("/AdminReport");
+  }
+  report() {
+    this.router.navigateByUrl("/report/admin");
+  }
+  adTree() {
+    this.router.navigateByUrl("/tree/admin");
+  }
+
+  coach() {
+    this.router.navigateByUrl("/admin/addCoach");
+  }
 }
