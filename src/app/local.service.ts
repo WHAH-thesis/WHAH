@@ -21,5 +21,8 @@ export class LocalService {
   reported: any;
   // data of user 
   user : any ; 
+  // protected routes
+  redirected : boolean = false ;
+  
   constructor() {}
 }
