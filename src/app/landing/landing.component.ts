@@ -5,6 +5,7 @@ import { LocalService } from "../local.service";
 
 import { FormControl } from "@angular/forms";
 
+
 @Component({
   selector: "app-landing",
   templateUrl: "./landing.component.html",
@@ -26,6 +27,7 @@ export class LandingComponent implements OnInit {
   ////////////////////////// redirect user ////////////////////////////////
   student() {
     this.router.navigateByUrl("/signup/student");
+
     this.local.redirected = true;
   }
   company() {
@@ -38,6 +40,7 @@ export class LandingComponent implements OnInit {
   }
   studentl() {
     this.router.navigateByUrl("/signin/student");
+
     this.local.redirected = true;
   }
   companyl() {
