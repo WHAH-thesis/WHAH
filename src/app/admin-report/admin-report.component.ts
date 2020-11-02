@@ -34,7 +34,6 @@ export class AdminReportComponent implements OnInit {
     this.ngOnInit();
   }
 
-  // DISCONNECT
   goback() {
     this.local.redirected = false;
 

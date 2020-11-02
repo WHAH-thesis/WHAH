@@ -8,13 +8,13 @@
     aria-expanded="false"
     aria-label="Toggle navigation"
   >
-    <!-- <img
-        src="../../assets/logo.png"
-        width="50"
-        height="30"
-        alt=""
-        loading="lazy"
-      /> -->
+    <img
+      src="../../assets/logo.png"
+      width="50"
+      height="30"
+      alt=""
+      loading="lazy"
+    />
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -44,6 +44,7 @@
           <button class="dropdown-item" (click)="student()">
             Student SignUp
           </button>
+
           <button class="dropdown-item" (click)="studentl()">
             Student LogIn
           </button>
@@ -91,18 +92,22 @@
           </button>
         </div>
       </li>
-      <li>
-        <button
-          class="btn btn-sm btn-outline-secondary left"
-          type="button"
-          (click)="home()"
-        >
-          Home
-        </button>
-      </li>
     </ul>
+    <form class="form-inline" style="margin-left: 700px;">
+      <button class="btn btn-outline-success" type="button" (click)="home()">
+        Home
+      </button>
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        (click)="aboutUs()"
+      >
+        About
+      </button>
+    </form>
   </div>
 </nav>
+
 <div class="about-section">
   <div class="inner-container">
     <h1>About Us</h1>

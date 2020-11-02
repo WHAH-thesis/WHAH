@@ -58,7 +58,6 @@ export class AdminWeeklyUpdateComponent implements OnInit {
     this.silver();
     this.gold();
   }
-  // DISCONNECT
   goback() {
     this.local.redirected = false;
 

@@ -7,9 +7,9 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" (click)="ban()">
+            <a class="nav-link" (click)="ban()">
               <span data-feather="home"></span>
-              Ban <span class="sr-only">(current)</span>
+              Ban
             </a>
           </li>
           <li class="nav-item">
@@ -31,8 +31,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
-              <span data-feather="bar-chart-2" (click)="feedback()"></span>
+            <a class="nav-link" (click)="feedback()">
+              <span data-feather="bar-chart-2"></span>
               feedback
             </a>
           </li>
@@ -43,9 +43,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="report()">
+            <a class="nav-link active" (click)="report()">
               <span data-feather="layers"></span>
-              reports
+              reports <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
@@ -63,22 +63,23 @@
         </ul>
       </div>
     </nav>
-
-    <div class="card" style="width: 18rem;" *ngFor="let element of reports">
-      <img
-        src="https://globalyounggreens.org/wp-content/uploads/2020/05/report.jpg"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ this.element?.name }}</h5>
-        <h4 class="card-text">{{ this.element?.postId }}</h4>
-        <p class="card-text">{{ this.element?.reason }}</p>
-        <p class="card-text">{{ this.element?.comment }}</p>
-      </div>
-      <div class="card-body">
-        <a class="card-link">Card link</a>
-        <a class="card-link">Another link</a>
+    <div style="margin-left: 350px;">
+      <div class="card" style="width: 18rem;" *ngFor="let element of reports">
+        <img
+          src="https://globalyounggreens.org/wp-content/uploads/2020/05/report.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ this.element?.name }}</h5>
+          <h4 class="card-text">{{ this.element?.postId }}</h4>
+          <p class="card-text">{{ this.element?.reason }}</p>
+          <p class="card-text">{{ this.element?.comment }}</p>
+        </div>
+        <div class="card-body">
+          <a class="card-link">Card link</a>
+          <a class="card-link">Another link</a>
+        </div>
       </div>
     </div>
   </div>

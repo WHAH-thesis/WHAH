@@ -2,43 +2,50 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpService } from "../http.service";
 import { FormControl } from "@angular/forms";
+import { LocalService } from "../local.service";
+
 @Component({
   selector: "app-about-us",
   templateUrl: "./about-us.component.html",
   styleUrls: ["./about-us.component.css"],
 })
 export class AboutUsComponent implements OnInit {
-  constructor(private _http: HttpService, private router: Router) {}
+  constructor(
+    private _http: HttpService,
+    private local: LocalService,
+    private router: Router
+  ) {}
   ngOnInit(): void {}
+
+  home() {
+    this.router.navigateByUrl("/");
+  }
+  aboutUs() {
+    this.router.navigateByUrl("/aboutUs");
+  }
+  ////////////////////////// redirect user ////////////////////////////////
   student() {
     this.router.navigateByUrl("/signup/student");
+    this.local.redirected = true;
   }
   company() {
     this.router.navigateByUrl("/signup/company");
+    this.local.redirected = true;
   }
   center() {
     this.router.navigateByUrl("/signup/center");
+    this.local.redirected = true;
   }
   studentl() {
     this.router.navigateByUrl("/signin/student");
+    this.local.redirected = true;
   }
   companyl() {
     this.router.navigateByUrl("/signin/company");
+    this.local.redirected = true;
   }
   centerl() {
     this.router.navigateByUrl("/signin/center");
-  }
-  submitForm(username, typeOfUser, message) {
-    let obj = { username, typeOfUser, message };
-    console.log(obj);
-    if (!obj.message) {
-      alert("your msg please");
-      return;
-    }
-    this._http.usersReport(obj).subscribe((data) => {});
-    alert("thanks for your message'A CHANGER'");
-  }
-  home() {
-    this.router.navigateByUrl("");
+    this.local.redirected = true;
   }
 }
