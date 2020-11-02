@@ -31,7 +31,6 @@ export class StudentFeedComponent implements OnInit {
         "Dear Student , your application is saved , we'll conatct you as soon as possible"
       );
       this.router.navigateByUrl("/studentProfile");
-
     });
   }
   // see the all the post
@@ -42,5 +41,26 @@ export class StudentFeedComponent implements OnInit {
   report(post) {
     this.local.reported = post;
     this.router.navigateByUrl("report/post");
+  }
+  searchProfil(profilName) {
+    this._http.findProfil({ profilName }).subscribe((res) => {
+      this.local.otherProfile = res[0];
+      this.router.navigateByUrl("/resultSearch");
+    });
+  }
+  profile() {
+    this.router.navigateByUrl("/studentProfile");
+  }
+  takeMeToReports() {
+    this.router.navigateByUrl("/sendReport");
+  }
+  feed() {
+    this.router.navigateByUrl("/feed/student");
+  }
+  logOutStudent() {
+    this.local.redirected = false;
+    console.log(this.local.redirected);
+    localStorage.setItem("token", "");
+    this.router.navigateByUrl("/");
   }
 }

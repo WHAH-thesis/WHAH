@@ -7,9 +7,9 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" (click)="ban()">
+            <a class="nav-link" (click)="ban()">
               <span data-feather="home"></span>
-              Ban <span class="sr-only">(current)</span>
+              Ban
             </a>
           </li>
           <li class="nav-item">
@@ -31,9 +31,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
-              <span data-feather="bar-chart-2" (click)="feedback()"></span>
-              feedback
+            <a class="nav-link active" (click)="feedback()">
+              <span data-feather="bar-chart-2"></span>
+              feedback <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
@@ -64,7 +64,7 @@
       </div>
     </nav>
 
-    <div class="all">
+    <div class="all" style="margin-left: 350px;">
       <table class="table">
         <thead class="thead-dark">
           <tr>

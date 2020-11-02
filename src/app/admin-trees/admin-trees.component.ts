@@ -105,7 +105,6 @@ export class AdminTreesComponent implements OnInit {
       console.log(data);
     });
   }
-  // DISCONNECT
   goback() {
     this.local.redirected = false;
 

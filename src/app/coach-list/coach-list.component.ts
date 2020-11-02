@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { LocalService } from '../local.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { HttpService } from "../http.service";
+import { LocalService } from "../local.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-coach-list',
-  templateUrl: './coach-list.component.html',
-  styleUrls: ['./coach-list.component.css'],
+  selector: "app-coach-list",
+  templateUrl: "./coach-list.component.html",
+  styleUrls: ["./coach-list.component.css"],
 })
 export class CoachListComponent implements OnInit {
   constructor(
@@ -15,14 +15,16 @@ export class CoachListComponent implements OnInit {
     private router: Router
   ) {}
 
-  coachList : any = []
+  coachList: any = [];
 
   ngOnInit(): void {
-    this._http.getCoaches().subscribe((data)=>{
-    this.coachList = data
-    console.log(this.coachList)
-    })
+    this._http.getCoaches().subscribe((data) => {
+      this.coachList = data;
+      console.log(this.coachList);
+    });
   }
 
-
+  profile() {
+    this.router.navigateByUrl("/studentProfile");
+  }
 }

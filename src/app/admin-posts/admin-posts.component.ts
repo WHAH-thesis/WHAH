@@ -29,7 +29,6 @@ export class AdminPostsComponent implements OnInit {
       alert("deleted :) ");
     });
   }
-  // DISCONNECT
   goback() {
     this.local.redirected = false;
 

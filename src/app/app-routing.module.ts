@@ -46,7 +46,7 @@ import { AdminAddCoachComponent } from "./admin-add-coach/admin-add-coach.compon
 import { CoachListComponent } from "./coach-list/coach-list.component";
 import { AuthGuard } from "./auth.guard";
 import { AboutUsComponent } from "./about-us/about-us.component";
-
+import { ChoiceComponent } from "./choice/choice.component";
 
 const routes: Routes = [
   { path: "register/student", component: VerficationComponent },
@@ -239,8 +239,12 @@ const routes: Routes = [
     component: CoachListComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "users/choice",
+    component: ChoiceComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "aboutUs", component: AboutUsComponent },
-
 ];
 
 @NgModule({
