@@ -660,8 +660,13 @@ app.post("/api/deleteApply", (req, res) => {
   });
 });
 app.post("/api/acceptapply", (req, res) => {
+  console.log(req.body)
+  usermail = "";
+   db.bringMail(req.body.name, (err, data) => {
+    err ? console.log(err) : usermail = data[0].email 
+   })
   db.acceptApp(req.body.id, (err, data) => {
-    err ? console.log(err) : res.send(data);
+    err ? console.log(err) : db.senderMail(usermail , req.body.name, req.body.compName);
   });
 });
 

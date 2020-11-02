@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class NotificationComponent implements OnInit {
   application: any;
+  compName : any ;
   constructor(
     private _http: HttpService,
     private local: LocalService,
@@ -18,18 +19,24 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     var obj = { owner: this.local.companyInfo.owner };
-    console.log(obj);
+    this.compName = this.local.message
     this._http.httpGetApplications(obj).subscribe((data) => {
       this.application = data;
       console.log(data);
     });
   }
-  accept(id) {
-    var obj = { id };
+  accept(id, name) {
+    var obj = { 
+      'id' : id ,
+      'name' : name ,
+      'compName' : this.local.message
+    };
+
     this._http.httpacceptApp(obj).subscribe((data) => {
       console.log(data);
       this.ngOnInit();
     });
+
   }
   reject(id) {
     var obj = { id };
