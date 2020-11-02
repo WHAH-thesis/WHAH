@@ -31,6 +31,7 @@ export class NotificationComponent implements OnInit {
       'name' : name ,
       'compName' : this.local.message
     };
+
     this._http.httpacceptApp(obj).subscribe((data) => {
       console.log(data);
       this.ngOnInit();
