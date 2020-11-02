@@ -53,6 +53,8 @@ import { AdminTreesComponent } from './admin-trees/admin-trees.component';
 import { StudentsTreesComponent } from './students-trees/students-trees.component';
 import { AdminAddCoachComponent } from './admin-add-coach/admin-add-coach.component';
 import { CoachListComponent } from './coach-list/coach-list.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ChoiceComponent } from './choice/choice.component';
 
 
 @NgModule({
@@ -102,6 +104,8 @@ import { CoachListComponent } from './coach-list/coach-list.component';
     StudentsTreesComponent,
     AdminAddCoachComponent,
     CoachListComponent,
+    AboutUsComponent,
+    ChoiceComponent,
 
   ],
   imports: [

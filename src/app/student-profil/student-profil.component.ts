@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { Router } from '@angular/router';
-import { LocalService } from '../local.service';
+import { Component, OnInit } from "@angular/core";
+import { HttpService } from "../http.service";
+import { Router } from "@angular/router";
+import { LocalService } from "../local.service";
 
 @Component({
-  selector: 'app-student-profil',
-  templateUrl: './student-profil.component.html',
-  styleUrls: ['./student-profil.component.css'],
+  selector: "app-student-profil",
+  templateUrl: "./student-profil.component.html",
+  styleUrls: ["./student-profil.component.css"],
 })
 export class StudentProfilComponent implements OnInit {
   constructor(
@@ -16,39 +16,45 @@ export class StudentProfilComponent implements OnInit {
   ) {}
   userData: any;
   ngOnInit(): void {
-    const userToken = localStorage.getItem('token');
+    const userToken = localStorage.getItem("token");
     var obj = {
       token: userToken,
     };
     // get all data for user
     this._http.userProfil(obj).subscribe((res) => {
       this.userData = res[0];
-      this.local.user = {image : this.userData.profilePic , name : this.userData.firstname}
+      this.local.user = {
+        image: this.userData.profilePic,
+        name: this.userData.firstname,
+      };
     });
   }
   navToEdit() {
-    this.router.navigateByUrl('editStudent');
+    this.router.navigateByUrl("editStudent");
   }
   // search for other student profile
   searchProfil(profilName) {
     this._http.findProfil({ profilName }).subscribe((res) => {
       this.local.otherProfile = res[0];
-      this.router.navigateByUrl('/resultSearch');
+      this.router.navigateByUrl("/resultSearch");
     });
-   
   }
-  takeMeToReports(){
-    this.router.navigateByUrl('sendReport')
+  profile() {
+    this.router.navigateByUrl("/studentProfile");
   }
-  feed(){
-    this.router.navigateByUrl('/feed/student');
+  takeMeToReports() {
+    this.router.navigateByUrl("/sendReport");
   }
-  logOutStudent(){
-    this.local.redirected = false ;
+  feed() {
+    this.router.navigateByUrl("/feed/student");
+  }
+  logOutStudent() {
+    this.local.redirected = false;
     console.log(this.local.redirected);
     localStorage.setItem("token", "");
     this.router.navigateByUrl("/");
-
-    
+  }
+  choice() {
+    this.router.navigateByUrl("/users/choice");
   }
 }

@@ -1,0 +1,126 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <img
+      src="../../assets/logo.png"
+      width="50"
+      height="30"
+      alt=""
+      loading="lazy"
+    />
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <a class="navbar-brand" href="#">
+      <img
+        src="../../assets/logo.png"
+        width="50"
+        height="30"
+        alt=""
+        loading="lazy"
+      />
+    </a>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Student
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <button class="dropdown-item" (click)="student()">
+            Student SignUp
+          </button>
+
+          <button class="dropdown-item" (click)="studentl()">
+            Student LogIn
+          </button>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Company
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <button class="dropdown-item" (click)="company()">
+            Company SignUp
+          </button>
+          <button class="dropdown-item" (click)="companyl()">
+            Company LogIn
+          </button>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Training Center
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <button class="dropdown-item" (click)="center()">
+            Center SignUp
+          </button>
+          <button class="dropdown-item" (click)="centerl()">
+            Center LogIn
+          </button>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline" style="margin-left: 700px;">
+      <button class="btn btn-outline-success" type="button" (click)="home()">
+        Home
+      </button>
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        (click)="aboutUs()"
+      >
+        About
+      </button>
+    </form>
+  </div>
+</nav>
+
+<div class="about-section">
+  <div class="inner-container">
+    <h1>About Us</h1>
+    <p class="text">
+      We inted to create the best fun and original way to improve the current
+      educational system , if you want do discover more and start building your
+      dreams start now ...
+    </p>
+    <div class="skills">
+      <a>Wala Nour</a>
+      <a>Halim Boussada </a>
+      <a>Hamza BenJabeur</a>
+      <a>Ala Rbai</a>
+    </div>
+  </div>
+</div>

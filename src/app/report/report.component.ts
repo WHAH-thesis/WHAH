@@ -29,4 +29,25 @@ export class ReportComponent implements OnInit {
       alert("reported");
     });
   }
+  searchProfil(profilName) {
+    this._http.findProfil({ profilName }).subscribe((res) => {
+      this.local.otherProfile = res[0];
+      this.router.navigateByUrl("/resultSearch");
+    });
+  }
+  profile() {
+    this.router.navigateByUrl("/studentProfile");
+  }
+  takeMeToReports() {
+    this.router.navigateByUrl("/sendReport");
+  }
+  feed() {
+    this.router.navigateByUrl("/feed/student");
+  }
+  logOutStudent() {
+    this.local.redirected = false;
+    console.log(this.local.redirected);
+    localStorage.setItem("token", "");
+    this.router.navigateByUrl("/");
+  }
 }
