@@ -1,126 +1,174 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light nav">
-  <button
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <!-- <a class="navbar-brand" (click)="home()">logo</a> -->
+  <img
+    (click)="home()"
+    src="../../assets/logo.png"
+    width="80"
+    height="50"
+    alt=""
+    loading="lazy"
+    style="cursor: pointer"
+  />
+  <!-- <button
     class="navbar-toggler"
     type="button"
     data-toggle="collapse"
-    data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+    data-target="#navbarSupportedContent"
   >
-    <img
-      src="../../assets/logo.png"
-      width="50"
-      height="30"
-      alt=""
-      loading="lazy"
-    />
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <a class="navbar-brand" href="#">
-      <img
-        src="../../assets/logo.png"
-        width="50"
-        height="30"
-        alt=""
-        loading="lazy"
-      />
-    </a>
-    <ul class="navbar-nav">
+    <span class="navbar-toggle-icon"></span>
+  </button> -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
           href="#"
-          id="navbarDropdownMenuLink"
+          id="navbarDropdown"
           role="button"
           data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
+          >Student</a
         >
-          Student
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <button class="dropdown-item" (click)="student()">
-            Student SignUp
-          </button>
-
-          <button class="dropdown-item" (click)="studentl()">
-            Student LogIn
-          </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="student()">SignUp</a>
+          <a class="dropdown-item" (click)="studentl()">SignIn</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
           href="#"
-          id="navbarDropdownMenuLink"
+          id="navbarDropdown"
           role="button"
           data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
+          >Company</a
         >
-          Company
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <button class="dropdown-item" (click)="company()">
-            Company SignUp
-          </button>
-          <button class="dropdown-item" (click)="companyl()">
-            Company LogIn
-          </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="company()">SignUp</a>
+          <a class="dropdown-item" (click)="companyl()">SignIn</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
           href="#"
-          id="navbarDropdownMenuLink"
+          id="navbarDropdown"
           role="button"
           data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
+          >Training Center</a
         >
-          Training Center
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <button class="dropdown-item" (click)="center()">
-            Center SignUp
-          </button>
-          <button class="dropdown-item" (click)="centerl()">
-            Center LogIn
-          </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="center()">SignUp</a>
+          <a class="dropdown-item" (click)="centerl()">SignIn</a>
         </div>
       </li>
     </ul>
-    <form class="form-inline" style="margin-left: 700px;">
-      <button class="btn btn-outline-success" type="button" (click)="home()">
-        Home
-      </button>
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        (click)="aboutUs()"
-      >
-        About
-      </button>
-    </form>
   </div>
 </nav>
-
-<div class="about-section">
-  <div class="inner-container">
-    <h1>About Us</h1>
-    <p class="text">
-      We inted to create the best fun and original way to improve the current
-      educational system , if you want do discover more and start building your
-      dreams start now ...
-    </p>
-    <div class="skills">
-      <a>Wala Nour</a>
-      <a>Halim Boussada </a>
-      <a>Hamza BenJabeur</a>
-      <a>Ala Rbai</a>
+<div class="about-area">
+  <div class="conatiner">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="about-img">
+          <img
+            src="https://images.pexels.com/photos/697243/pexels-photo-697243.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 col-lg-offset-1">
+        <div class="about-text">
+          <h2>About Our Team</h2>
+          <p>
+            We're a team mainly composed of four full stack developpers, we
+            maintain a vision that is willin to improve the educational system
+            in tunisia using new methodologies that will involve the new
+            generation in the professional life as well as giving them
+            opportunities to invade the whole country with new,bright and fresh
+            ideas from the youngsters.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 style="color: chocolate; margin-top: 300px; margin-left: 40%">
+  Meet our Team
+</h1>
+<div class="card-group" style="margin-top: 50px ;">
+  <div class="card" style="border: none ; margin-left: 5%;">
+    <a href="#"
+      ><img
+        id="halim"
+        src="../../assets/wala.jpg"
+        width="300"
+        height="300"
+        style="border-radius: 50% ; "
+    /></a>
+    <div class="card-body">
+      <h3 class="user-name">Nour Wala</h3>
+      <h5>Scrum Master</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to
+        additional content. This content is a little bit longer.
+      </p>
+      <a href="#">Nour Wala</a>
+    </div>
+  </div>
+  <div class="card" style="border: none ; margin-left: 5%;">
+    <a href="#"
+      ><img
+        id="halim"
+        src="https://avatars0.githubusercontent.com/u/66827428?s=460&u=f30b35c04365996e3cddd12eace249499a61cfa3&v=4"
+        width="300"
+        height="300"
+        style="border-radius: 50% ;"
+    /></a>
+    <div class="card-body">
+      <h3 class="user-name">Halim Boussada</h3>
+      <h5>Scrum Master</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to
+        additional content. This content is a little bit longer.
+      </p>
+      <a href="#">Halim Boussada</a>
+    </div>
+  </div>
+  <div class="card" style="border: none ; margin-left: 5%;">
+    <a href="#"
+      ><img
+        id="halim"
+        src="../../assets/ala.jpg"
+        width="300"
+        height="300"
+        style="border-radius: 50% ;"
+    /></a>
+    <div class="card-body">
+      <h3 class="user-name">Rebai Med-Ala</h3>
+      <h5>Scrum Master</h5>
+      <p class="card-text">
+        This card has supporting text below as a natural lead-in to additional
+        content.
+      </p>
+      <a href="#">Rebai Med-Ala</a>
+    </div>
+  </div>
+  <div class="card" style="border: none ; margin-left: 5%;">
+    <a href="#"
+      ><img
+        id="halim"
+        src="https://avatars0.githubusercontent.com/u/66827428?s=460&u=f30b35c04365996e3cddd12eace249499a61cfa3&v=4"
+        width="300"
+        height="300"
+        style="border-radius: 50% ; "
+    /></a>
+    <div class="card-body">
+      <h3 class="user-name">BenJabeur Hamza</h3>
+      <h5>Scrum Master</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to
+        additional content. This card has even longer content than the first to
+        show that equal height action.
+      </p>
+      <a href="#">BenJabeur Hamza</a>
     </div>
   </div>
 </div>
