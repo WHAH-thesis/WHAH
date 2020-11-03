@@ -2,9 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpService } from "../http.service";
 import { LocalService } from "../local.service";
-
 import { FormControl } from "@angular/forms";
-
 @Component({
   selector: "app-landing",
   templateUrl: "./landing.component.html",
@@ -19,7 +17,6 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.local.redirected);
   }
-
   home() {
     this.router.navigateByUrl("/");
   }

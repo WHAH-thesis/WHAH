@@ -1,12 +1,11 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import { HttpService } from '../http.service';
-import { LocalService } from '../local.service';
-import { Router } from '@angular/router';
-
+import { Component, OnInit, ɵConsole } from "@angular/core";
+import { HttpService } from "../http.service";
+import { LocalService } from "../local.service";
+import { Router } from "@angular/router";
 @Component({
-  selector: 'app-student-login',
-  templateUrl: './student-login.component.html',
-  styleUrls: ['./student-login.component.css'],
+  selector: "app-student-login",
+  templateUrl: "./student-login.component.html",
+  styleUrls: ["./student-login.component.css"],
 })
 export class StudentLoginComponent implements OnInit {
   constructor(
@@ -14,14 +13,15 @@ export class StudentLoginComponent implements OnInit {
     private local: LocalService,
     private router: Router
   ) {}
-  token: any = '';
+  user: any;
+  token: any = "";
   username: any;
   ngOnInit(): void {
-    localStorage.getItem('token');
+    localStorage.getItem("token");
   }
   // to sign up
   singup() {
-    this.router.navigateByUrl('/signup/student');
+    this.router.navigateByUrl("/signup/student");
   }
   // sign in user and redirect acording to its data
   collectLog(username, password) {
@@ -29,51 +29,79 @@ export class StudentLoginComponent implements OnInit {
       username: username.value,
       password: password.value,
     };
-    this.local.message = obj.username;
     this._http.loginStudent(obj).subscribe((data) => {
-      console.log(data)
-      if(data){
-        this.token = data['token'];
+      console.log(data);
+      if (data) {
+        this.token = data["token"];
         this._http
           .httpgetUserState({ username: username.value })
           .subscribe((data) => {
+            this.local.message = data[0].username;
             var c1 =
-              data[0].verification === 'true' &&
-              data[0].verRequest === 'true' &&
-              data[0].firstTime === 'false';
+              data[0].verification === "true" &&
+              data[0].verRequest === "true" &&
+              data[0].firstTime === "false";
             var c2 =
-              data[0].verification === 'true' &&
-              data[0].verRequest === 'true' &&
-              data[0].firstTime === 'true';
+              data[0].verification === "true" &&
+              data[0].verRequest === "true" &&
+              data[0].firstTime === "true";
             var c3 =
-              data[0].verification === 'false' &&
-              data[0].verRequest === 'false' &&
-              data[0].firstTime === 'true';
+              data[0].verification === "false" &&
+              data[0].verRequest === "false" &&
+              data[0].firstTime === "true";
             console.log(c1, c2, c3);
             var c4 =
-              data[0].verification === 'false' &&
-              data[0].verRequest === 'true' &&
-              data[0].firstTime === 'true';
-  
+              data[0].verification === "false" &&
+              data[0].verRequest === "true" &&
+              data[0].firstTime === "true";
             if (c1) {
-              console.log('condition 1');
-              this.router.navigateByUrl('/studentProfile');
+              console.log("condition 1");
+              this.router.navigateByUrl("/studentProfile");
             } else if (c2) {
-              console.log('condition 2');
-              this.router.navigateByUrl('/register/student');
+              console.log("condition 2");
+              this.router.navigateByUrl("/register/student");
             } else if (c3) {
-              console.log('condition 3');
-              this.router.navigateByUrl('/verification/request/student');
+              console.log("condition 3");
+              this.router.navigateByUrl("/verification/request/student");
             } else if (c4) {
-              console.log('condition 3');
-              this.router.navigateByUrl('/wait');
+              console.log("condition 3");
+              this.router.navigateByUrl("/wait");
             }
-            localStorage.setItem('token', this.token);
+            localStorage.setItem("token", this.token);
           });
-      }
-      else{
-        alert('wrong password')
+      } else {
+        alert("wrong password");
       }
     });
+  }
+  func(user) {
+    var obj = {
+      username: user,
+    };
+    this._http.checkExistingNames(obj).subscribe((data) => {
+      this.user = data;
+    });
+  }
+  // sign up student
+  collect(username, email, secretinfo, password) {
+    var obj = { username, email, secretinfo, password };
+    var nameObj = { username };
+    this._http.checkuserNames(nameObj).subscribe((data) => {
+      console.log(data);
+      if (!data) {
+        console.log("false");
+        this._http.register(obj).subscribe((data) => {
+          this.local.redirected = true;
+          document.getElementById("id01").style.display = "none";
+          console.log("inside the function ", this.local.redirected);
+        });
+      } else {
+        console.log("true");
+        alert("name already existing");
+      }
+    });
+  }
+  sign() {
+    document.getElementById("id01").style.display = "block";
   }
 }

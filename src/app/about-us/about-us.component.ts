@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { HttpService } from "../http.service";
 import { FormControl } from "@angular/forms";
 import { LocalService } from "../local.service";
-
 @Component({
   selector: "app-about-us",
   templateUrl: "./about-us.component.html",
@@ -16,7 +15,6 @@ export class AboutUsComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {}
-
   home() {
     this.router.navigateByUrl("/");
   }
