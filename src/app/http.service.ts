@@ -22,12 +22,23 @@ export class HttpService {
   loginStudent(obj) {
     return this.http.post(this.ROOT_URL + '/login', obj);
   }
+  getStudentsName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/studentsName', obj);
+  }
   loginCompanies(data) {
     return this.http.post(this.ROOT_URL + '/loginCompanies', data);
   }
+  getCompaniesName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/companyName', obj);
+  }
+
   loginTC(data) {
     return this.http.post(this.ROOT_URL + '/loginTC', data);
   }
+  // getTc name after logIN 
+  getTcName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/tcName', obj);
+  }  
   ///////////// REGISTER ///////////////////////
   httpRegister(obj) {
     return this.http.post(this.ROOT_URL + `/api/users/registration`, obj);

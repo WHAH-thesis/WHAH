@@ -245,7 +245,7 @@ app.post("/api/users/getCompanysatate", (req, res) => {
 });
 
 app.post("/api/users/getCentersatate", (req, res) => {
-  console.log(req.body);
+  
   db.getCenterStatus(req.body.name, (err, data) => {
     if (err) throw err;
     res.status(200).send(data);
@@ -254,7 +254,7 @@ app.post("/api/users/getCentersatate", (req, res) => {
 
 // SIGN UP STUDENT
 app.post("/addStudents", (req, res) => {
-  console.log(req.body);
+  
   var arr = [
     req.body.username,
     req.body.secretinfo,
@@ -304,8 +304,14 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.post("/users/studentsName", (req, res)=> {
+  db.studentsMessage(req.body.data, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
 app.post("/addCompany", (req, res) => {
-  var array = [req.body.name, hash(req.body.password)];
+  var array = [req.body.name, hash(req.body.password), req.body.email];
   db.addCompany(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
@@ -345,8 +351,14 @@ app.post("/loginCompanies", (req, res) => {
   });
 });
 
+app.post("/users/companyName", (req, res)=> {
+  db.companyMessage(req.body.data, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
 app.post("/addTC", (req, res) => {
-  var array = [req.body.name, hash(req.body.password)];
+  var array = [req.body.name, hash(req.body.password), req.body.email];
   db.addTC(array, (err, data) => {
     err ? console.log(err) : res.send(data);
   });
@@ -385,6 +397,14 @@ app.post("/loginTC", (req, res) => {
     });
   });
 });
+
+app.post("/users/tcName", (req, res)=> {
+  db.tcMessage(req.body.data, (err, data) => {
+    err ? console.log(err) : res.send(data);
+  })
+})
+
+
 
 ////////////////// ADD TOKENS TO DATABASE //////////////
 app.post("/api/users/studentToken", (req, res) => {
