@@ -40,6 +40,7 @@ export class LoginCompaniesComponent implements OnInit {
         this._http
           .httpgetCompanyState({ name: name.value })
           .subscribe((data) => {
+            this.local.message = data[0].name
             var c1 =
               data[0].verification === "true" &&
               data[0].verRequest === "true" &&
@@ -71,8 +72,8 @@ export class LoginCompaniesComponent implements OnInit {
       }
     });
   }
-  collectCompanies(name, password) {
-    var obj = { name, password };
+  collectCompanies(name, password ,email) {
+    var obj = { name, password ,email};
     this._http.registerCompanies(obj).subscribe((data) => {
       document.getElementById("id01").style.display = "none";
     });

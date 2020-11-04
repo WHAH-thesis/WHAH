@@ -20,26 +20,28 @@ export class LoginTcComponent implements OnInit {
     this.router.navigateByUrl("/signup/center");
   }
   loginTC(name, password) {
-    const data = {
-      'data' : name.value
+    const dat = {
+      data : name
     }
-    this._http.getTcName(data).subscribe((data)=>{
-      this.local.message = data
-      console.log(this.local.message)
+    this._http.getTcName(dat).subscribe((data)=>{
+      console.log(data)
     });
-    
     const obj = {
-      name: name.value,
-      password: password.value,
+      name: name,
+      password: password
     };
+    console.log("this is the obj" , obj )
     // log and acording to the user data redirect him
     this._http.loginTC(obj).subscribe((data) => {
+      console.log("dtdtdt" , data)
       if (data) {
         this.token = data["token"];
         localStorage.setItem("token", this.token);
         this._http
-          .httpgetCenterState({ name: name.value })
+          .httpgetCenterState({ name: name })
           .subscribe((data) => {
+            this.local.message = data[0].name
+
             var c1 =
               data[0].verification === "true" &&
               data[0].verRequest === "true" &&
@@ -71,8 +73,9 @@ export class LoginTcComponent implements OnInit {
       }
     });
   }
-  addTC(name, password) {
-    var obj = { name, password };
+  addTC(name, password , email) {
+    var obj = { name, password , email};
+    console.log(obj)
     this._http.registerTC(obj).subscribe((data) => {
       document.getElementById("id01").style.display = "none";
     });
