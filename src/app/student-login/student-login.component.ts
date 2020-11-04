@@ -3,10 +3,11 @@ import { HttpService } from '../http.service';
 import { LocalService } from '../local.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+
 @Component({
-  selector: 'app-student-login',
-  templateUrl: './student-login.component.html',
-  styleUrls: ['./student-login.component.css'],
+  selector: "app-student-login",
+  templateUrl: "./student-login.component.html",
+  styleUrls: ["./student-login.component.css"],
 })
 export class StudentLoginComponent implements OnInit {
   constructor(
@@ -17,9 +18,10 @@ export class StudentLoginComponent implements OnInit {
   ) {}
   user: any;
   token: any = '';
+
   username: any;
   ngOnInit(): void {
-    localStorage.getItem('token');
+    localStorage.getItem("token");
   }
 
   loginWithGoogle() {
@@ -114,9 +116,10 @@ export class StudentLoginComponent implements OnInit {
     }, 8000);
   }
 
+
   // to sign up
   singup() {
-    this.router.navigateByUrl('/signup/student');
+    this.router.navigateByUrl("/signup/student");
   }
   // sign in user and redirect acording to its data
   collectLog(username, password) {
@@ -126,6 +129,7 @@ export class StudentLoginComponent implements OnInit {
     this._http.getStudentsName(data).subscribe((data) => {
       this.local.message = data;
     });
+
 
     const obj = {
       username: username.value,
@@ -172,6 +176,7 @@ export class StudentLoginComponent implements OnInit {
           });
       } else {
         alert('wrong password');
+
       }
     });
   }
@@ -199,6 +204,7 @@ export class StudentLoginComponent implements OnInit {
       } else {
         console.log('true');
         alert('name already existing');
+
       }
     });
   }
@@ -206,3 +212,4 @@ export class StudentLoginComponent implements OnInit {
     document.getElementById('id01').style.display = 'block';
   }
 }
+

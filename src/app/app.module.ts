@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 
+
 import { VerficationComponent } from './verfication/verfication.component';
 import { SendRequestforVerificationComponent } from './send-requestfor-verification/send-requestfor-verification.component';
 import { AdminVerificationComponent } from './admin-verification/admin-verification.component';
@@ -114,6 +115,7 @@ import { ChoiceComponent } from './choice/choice.component';
     CoachListComponent,
     AboutUsComponent,
     ChoiceComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -125,6 +127,7 @@ import { ChoiceComponent } from './choice/choice.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

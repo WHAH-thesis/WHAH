@@ -39,6 +39,7 @@ export class HttpService {
   getTcName(obj) {
     return this.http.post(this.ROOT_URL + '/users/tcName', obj);
   }
+
   ///////////// REGISTER ///////////////////////
   httpRegister(obj) {
     return this.http.post(this.ROOT_URL + `/api/users/registration`, obj);
@@ -324,5 +325,6 @@ export class HttpService {
   }
   socialLogin(obj) {
     return this.http.post(this.ROOT_URL + '/users/userSocialData', obj);
+
   }
 }
