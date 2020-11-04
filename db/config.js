@@ -3,5 +3,6 @@ module.exports = {
   user: "alaa",
   password: "ismailou53",
 
+
   database: "eduproject",
 };

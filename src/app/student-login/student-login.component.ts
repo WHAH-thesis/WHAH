@@ -143,7 +143,6 @@ export class StudentLoginComponent implements OnInit {
           .httpgetUserState({ username: username.value })
           .subscribe((data) => {
             this.local.message = data[0].name
-
             var c1 =
               data[0].verification === 'true' &&
               data[0].verRequest === 'true' &&
