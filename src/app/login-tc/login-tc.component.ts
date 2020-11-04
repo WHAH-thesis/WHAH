@@ -20,7 +20,14 @@ export class LoginTcComponent implements OnInit {
     this.router.navigateByUrl("/signup/center");
   }
   loginTC(name, password) {
-    this.local.message = name.value;
+    const data = {
+      'data' : name.value
+    }
+    this._http.getTcName(data).subscribe((data)=>{
+      this.local.message = data
+      console.log(this.local.message)
+    });
+    
     const obj = {
       name: name.value,
       password: password.value,

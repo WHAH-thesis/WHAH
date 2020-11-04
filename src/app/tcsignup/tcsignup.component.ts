@@ -16,8 +16,8 @@ export class TcsignupComponent implements OnInit {
     this.router.navigateByUrl('/signin/center');
   }
   // sign up Training center
-  addTC(name, password) {
-    var obj = { name, password };
+  addTC(name, password ,email) {
+    var obj = { name, password ,email};
     this._http.registerTC(obj).subscribe((data) => {
       this.router.navigateByUrl('/signin/center');
     });

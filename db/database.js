@@ -193,14 +193,14 @@ const usernameAndEmail = (callback) => {
 
 
 const addCompany = (arr, callback) => {
-  let sql = "insert into companies (name,password) values(?,?)";
+  let sql = "insert into companies (name,password,email) values(?,?,?)";
   connection.query(sql, arr, (err, data) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
 
 const companyName = (callback) => {
-  let sql = `select name from companies;`;
+  let sql = `select name, email from companies;`;
   connection.query(sql, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
@@ -209,21 +209,21 @@ const companyName = (callback) => {
 
 
 const logCompanies = (name, callback) => {
-  let sql = `select password from companies where name = ?`;
-  connection.query(sql, name, (err, data) => {
+  let sql = `select password from companies where name = '${name}' or email = '${name}'`;
+  connection.query(sql,(err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
 };
 const addTC = (arr, callback) => {
-  let sql = "insert into trainingCenters (name,password) values(?,?)";
+  let sql = "insert into trainingCenters (name,password,email) values(?,?,?)";
   connection.query(sql, arr, (err, data) => {
     err ? callback(err, null) : callback(null, data);
   });
 };
 
 const checkTcName = (callback) => {
-  let sql = `select name from trainingCenters;`;
+  let sql = `select name, email from trainingCenters;`;
   connection.query(sql, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
@@ -232,12 +232,38 @@ const checkTcName = (callback) => {
 
 
 const logTC = (name, callback) => {
-  let sql = `select password from trainingCenters where name = ?`;
+  let sql = `select password from trainingCenters where name = '${name}' or email = '${name}'`;
   connection.query(sql, name, (err, data) => {
     if (err) throw callback(err, null);
     callback(null, data);
   });
 };
+
+const tcMessage = (name, callback) => {
+  let sql = `select name from trainingCenters where name = '${name}' or email = '${name}'`;
+  connection.query(sql, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+const companyMessage = (name, callback) => {
+  let sql = `select name from companies where name = '${name}' or email = '${name}'`;
+  connection.query(sql, (err, data) => {
+
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
+
+const studentsMessage = (name, callback) => {
+  let sql = `select username from students where username = '${name}' or email = '${name}'`;
+  connection.query(sql, (err, data) => {
+
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+}
 
 const getUserStatus = (username, callback) => {
   let sql = `select * from students where username = '${username}' or email = '${username}'`;
@@ -872,6 +898,9 @@ const senderMail = (param , username, companyName) => {
 
 
 module.exports = {
+  studentsMessage,
+  companyMessage,
+  tcMessage,
   bringMail,
   senderMail,
   checkUsername,

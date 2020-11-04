@@ -25,6 +25,13 @@ export class StudentLoginComponent implements OnInit {
   }
   // sign in user and redirect acording to its data
   collectLog(username, password) {
+   var data = {
+     "data": username.value
+   }
+   this._http.getStudentsName(data).subscribe((data)=>{
+     this.local.message = data
+   })
+
     const obj = {
       username: username.value,
       password: password.value,
@@ -36,7 +43,7 @@ export class StudentLoginComponent implements OnInit {
         this._http
           .httpgetUserState({ username: username.value })
           .subscribe((data) => {
-            this.local.message = data[0].username;
+           
             var c1 =
               data[0].verification === "true" &&
               data[0].verRequest === "true" &&

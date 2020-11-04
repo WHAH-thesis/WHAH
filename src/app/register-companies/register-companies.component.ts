@@ -15,8 +15,8 @@ export class RegisterCompaniesComponent implements OnInit {
     this.router.navigateByUrl('/signin/company');
   }
   // sing up company
-  collectCompanies(name, password) {
-    var obj = { name, password };
+  collectCompanies(name, password, email) {
+    var obj = { name, password , email};
     this._http.registerCompanies(obj).subscribe((data) => {
       this.router.navigateByUrl('/signin/company');
     });

@@ -21,7 +21,12 @@ export class LoginCompaniesComponent implements OnInit {
   }
   collectLogCompanies(name, password) {
     // save the username in the local storage
-    this.local.message = name.value;
+    let myData = {"data": name.value}
+    this._http.getCompaniesName(myData).subscribe((data)=> {
+      this.local.message = data[0].name
+      console.log(this.local.message)
+    })
+    
     const obj = {
       name: name.value,
       password: password.value,
