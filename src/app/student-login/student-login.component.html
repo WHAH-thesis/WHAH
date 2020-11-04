@@ -35,6 +35,14 @@
       >
         Login
       </button>
+            <div class="col">
+        <a  (click)="loginWithFacebook()" class="fb btn">
+          <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+         </a>
+        <a (click)="loginWithGoogle()" class="google btn"><i class="fa fa-google fa-fw">
+          </i> Login with Google+
+        </a>
+      </div>
     </form>
     <h3>Or</h3>
     <p>
@@ -103,4 +111,5 @@
       };
     </script>
   </div>
+
 </div>

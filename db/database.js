@@ -174,6 +174,14 @@ const addStudent = (arr, callback) => {
   });
 };
 
+const addStudentSociel = (arr, callback) => {
+  let sql =
+    "insert into students (username ,secretinfo, password, email,token) values (?,?,?,?,?)";
+  connection.query(sql, arr, (err, data) => {
+    if (err) throw callback(err, null);
+    callback(null, data);
+  });
+};
 const getUserInfo = (username, callback) => {
   let sql = `select password from students where username = '${username}' or email = '${username}'`;
   connection.query(sql, (err, data) => {
@@ -210,7 +218,8 @@ const companyName = (callback) => {
 
 const logCompanies = (name, callback) => {
   let sql = `select password from companies where name = '${name}' or email = '${name}'`;
-  connection.query(sql,(err, data) => {
+  connection.query(sql, (err, data) => {
+
     if (err) throw callback(err, null);
     callback(null, data);
   });
@@ -742,7 +751,7 @@ const addTree = (arr, callback) => {
     callback(null, data);
   });
 };
- 
+
 
 // get all the trees 
 const getTrees = (callback) => {
@@ -765,7 +774,7 @@ const addPath = (arr, callback) => {
     callback(null, data);
   });
 };
- // get all the PATHS 
+
 
 const getPaths = (callback) => {
   let sql = `select * from paths  `;
@@ -803,10 +812,11 @@ const addrelation = (arr, callback) => {
     callback(null, data);
   });
 };
- 
+
 
 // get all the relations  
-const getJoin = (tree , callback) => {
+const getJoin = (tree, callback) => {
+
   let sql = `select * from relations WHERE treeName="${tree}"  `;
   connection.query(sql, (err, data) => {
     if (err) {
@@ -818,7 +828,8 @@ const getJoin = (tree , callback) => {
 };
 
 ////////////// POST AND GET COMMENT POST/////////////
-const postComments = (arr, callback)=>{
+const postComments = (arr, callback) => {
+
   let sql = `insert into comments (postId, username, postsText, imgUrl) values(?,?,?,?)`;
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err, null);
@@ -838,7 +849,8 @@ const getCommentsById = (id, callback) => {
 }
 
 //check existing username in singUp students
-const checkExistingUsername = (username, callback) =>{
+const checkExistingUsername = (username, callback) => {
+
   let sql = `select username from students where username like '${username}%'`
   connection.query(sql, (err, data) => {
     if (err) {
@@ -850,6 +862,7 @@ const checkExistingUsername = (username, callback) =>{
 }
 
 //check username in singUp students
+
 const checkUsername = (username , callback) => {
   let sql = `select username from students where username = '${username}'`
   connection.query(sql, (err, data) => {
@@ -897,7 +910,69 @@ const senderMail = (param , username, companyName) => {
 }
 
 
+// taking the user mail from username
+
+const bringMail = (username, callback) => {
+  let sql = `select email from students where username = '${username}'`;
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//send email to user from the company
+
+var transporter = require('./mailSender').transporter
+
+const senderMail = (param, username, companyName) => {
+  var mailOptions = {
+    from: 'alaa.rabai@gmail.com',
+    to: param,
+    subject: 'Sending Email using Node.js',
+    text: `dear ${username} we're here to inform you that your application for ${companyName} company have been approved and their willing to discuss your duties/salary  and are wishing you the best in your new journey . good luck`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+}
+
+
+// handle social login 
+const checkForSocialLog = (callback) => {
+  let sql = `select username from students `
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+//check for social login
+const getStudentsData = (username, callback) => {
+  let sql = `select * from students where username = '${username}'`
+  connection.query(sql, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+}
 module.exports = {
+  addStudentSociel,
+  getStudentsData,
+  checkForSocialLog,
+
   studentsMessage,
   companyMessage,
   tcMessage,
