@@ -875,40 +875,6 @@ const checkUsername = (username , callback) => {
 }
 
 
-// taking the user mail from username
-
-const bringMail = (username, callback) => {
-  let sql = `select email from students where username = '${username}'`;
-  connection.query(sql, (err, data) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, data);
-    }
-  });
-}
-
-//send email to user from the company
-
-var transporter = require('./mailSender').transporter
-
-const senderMail = (param , username, companyName) => {
-  var mailOptions = {
-    from: 'alaa.rabai@gmail.com',
-    to: param ,
-    subject: 'Sending Email using Node.js',
-    text: `dear ${username} we're here to inform you that your application for ${companyName} company have been approved and their willing to discuss your duties/salary  and are wishing you the best in your new journey . good luck`
-  };
-  
-  transporter.sendMail(mailOptions, (error, info)=>{
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
-}
-
 
 // taking the user mail from username
 
@@ -972,7 +938,6 @@ module.exports = {
   addStudentSociel,
   getStudentsData,
   checkForSocialLog,
-
   studentsMessage,
   companyMessage,
   tcMessage,

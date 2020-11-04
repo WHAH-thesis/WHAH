@@ -29,10 +29,10 @@
       />
       <button
         type="button"
-        (click)="loginTC(name, password)"
+        (click)="loginTC(name.value, password.value)"
         class="btn btn-outline-secondary"
         style="width: auto;"
-      >
+      > 
         Login
       </button>
     </form>
@@ -78,7 +78,7 @@
           <button
             type="submit"
             class="btn btn-outline-secondary"
-            (click)="addTC(namee.value,passworde.value)"
+            (click)="addTC(namee.value,passworde.value,email.value)"
           >
             Sign Up
           </button>
