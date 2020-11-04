@@ -1,79 +1,114 @@
-<!-- <div class="container">
-  <form>
-    <div class="form-group">
-      <h1 class="text-center text-primary">Login</h1>
-      <div>
-        <label for="username">username</label>
-        <input type="text" class="form-control" name="username" #username />
-        <label for="email">email</label>
-        <input type="email" class="form-control" name="email" #email />
-        <label for="password">password</label>
-        <input type="password" class="form-control" name="password" #password />
-      </div>
-    </div>
-  </form>
-  <button (click)="collectLog(username, password)">submit</button>
-</div> -->
-
-
-
-<div class="container">
-  <div class="forms-container">
-    <div class="signin-signup">
-    <form action="#" class="sign-in-form">
-      <h2 class="title">Sign in</h2>
-      <div class="input-field">
-        <i class="fas fa-user"></i>
-        <input type="text" placeholder="Username" name="name" #name />
-      </div>
-      <div class="input-field">
-        <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Password" name="password" #password />
-      </div>
-      <input type="submit" (click)="collectLog(name, password)" value="Login" class="btn solid" />
-      <p class="social-text">Or Sign in with social platforms</p>
-      <div class="social-media">
-        <a href="#" class="social-icon">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="social-icon">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#" class="social-icon">
-          <i class="fab fa-google"></i>
-        </a>
-        <a href="#" class="social-icon">
-          <i class="fab fa-linkedin-in"></i>
+<div style="width: 100%;">
+  <div style="width: 40%; height: 700px; float: left;">
+    <img src="../../assets/under1.png" width="100%" height="700px" />
+  </div>
+  <div
+    style="
+      margin-left: 43%;
+      height: 700px;
+      margin-right: 6%;
+      text-align: center;
+    "
+  >
+    <h1 style="color: rgb(94, 148, 230);">Welcome To Whah</h1>
+    <p style="color: rgb(185, 185, 185);">
+      whah is a platform that help student from all the ages to discover new
+      technology's and provide them with courses certified by companies in
+      Tunisia
+    </p>
+    <form style="margin-top: 100px;">
+      <input type="text" id="fname" name="fname" #name placeholder="Usename" />
+      <br />
+      <br />
+      <input
+        type="password"
+        id="lname"
+        name="lname"
+        placeholder="Password"
+        #password
+      />
+      <button
+        type="button"
+        (click)="collectLog(name, password)"
+        class="btn btn-outline-secondary"
+        style="width: auto;"
+      >
+        Login
+      </button>
+            <div class="col">
+        <a  (click)="loginWithFacebook()" class="fb btn">
+          <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+         </a>
+        <a (click)="loginWithGoogle()" class="google btn"><i class="fa fa-google fa-fw">
+          </i> Login with Google+
         </a>
       </div>
     </form>
+    <h3>Or</h3>
+    <p>
+      Dont You Have An Account ?
+      <a (click)="sign()" style="color: orange;">Sign Up</a>
+    </p>
+    <div id="id01" class="modal">
+      <form
+        class="modal-content animate"
+        action="/action_page.php"
+        method="post"
+      >
+        <div class="imgcontainer">
+          <span
+            onclick="document.getElementById('id01').style.display='none'"
+            class="close"
+            title="Close Modal"
+            >&times;</span
+          >
+          <img src="../../assets/avatar3.png" alt="Avatar" class="avatar" />
+        </div>
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="namee"
+            #namee
+            [ngModel]=""
+            (ngModelChange)="func($event)"
+            required
+          />
+          <label for="uname"><b>Email</b></label>
+          <input type="text" placeholder="Enter Username" name="email" #email />
+          <label for="uname"><b>secret info </b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="secretinfo"
+            #secretinfo
+          />
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="passworde"
+            #passworde
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-outline-secondary"
+            (click)=" collect( namee.value,email.value,secretinfo.value,passworde.value) "
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
     </div>
-  </div>
-</div>
-
-<div class="panels-container">
-  <div class="panel left-panel">
-    <div class="content">
-      <h3>New here ?</h3>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-        ex ratione. Aliquid!
-      </p>
-      <button class="btn transparent" id="sign-up-btn" (click)="singup()">
-        Sign up
-      </button>
-    </div>
-  </div>
-  <div class="panel right-panel">
-    <div class="content">
-      <h3>One of us ?</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-        laboriosam ad deleniti.
-      </p>
-      <button class="btn transparent" id="sign-in-btn" >
-        Sign in
-      </button>
-    </div>
+    <script>
+      var modal = document.getElementById("id01");
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
   </div>
 </div>

@@ -13,11 +13,11 @@ export class BanUsersComponent implements OnInit {
     private router: Router,
     private local: LocalService
   ) {}
-
   students: any;
   companies: any;
   trainingCenters: any;
   ngOnInit(): void {
+    //////////////////// get all the users /////////////////////////////////
     this._http.httpGetStudents().subscribe((data) => {
       console.log("this is students ===>", (this.students = data));
     });
@@ -28,18 +28,15 @@ export class BanUsersComponent implements OnInit {
       console.log("this is training ===>", (this.trainingCenters = data));
     });
   }
-
-  reject(username) {
-    console.log("hh");
-  }
+  ////////////////// ban the user by its id /////////////////////////////
   banStudent(id) {
-    console.log(id);
     var obj = {
       id: id,
     };
+    // ban the user by its id
     this._http.httpbanstudent(obj).subscribe((data) => {
-      console.log("done");
       this.ngOnInit();
+      alert("banned");
     });
   }
   banCompany(id) {
@@ -48,7 +45,7 @@ export class BanUsersComponent implements OnInit {
       id: id,
     };
     this._http.httpbancompany(obj).subscribe((data) => {
-      console.log("done");
+      alert("banned");
       this.ngOnInit();
     });
   }
@@ -58,20 +55,43 @@ export class BanUsersComponent implements OnInit {
       id: id,
     };
     this._http.httpbancenter(obj).subscribe((data) => {
-      console.log("done");
+      alert("banned");
       this.ngOnInit();
     });
   }
+  // DISCONNECT
   goback() {
+    this.local.redirected = false;
+
     this.router.navigateByUrl("/admin/login");
   }
+  // go to ban users interface
   ban() {
     this.router.navigateByUrl("/admin/ban");
   }
-  verifications() {
+  // go to verification users interface
+  verf() {
     this.router.navigateByUrl("/admin");
   }
-  membership() {
+  // go to memberships of training centers interface
+  member() {
     this.router.navigateByUrl("/admin/update");
+  }
+
+  post() {
+    this.router.navigateByUrl("/admin/delete");
+  }
+  feedback() {
+    this.router.navigateByUrl("/AdminReport");
+  }
+  report() {
+    this.router.navigateByUrl("/report/admin");
+  }
+  adTree() {
+    this.router.navigateByUrl("/tree/admin");
+  }
+
+  coach() {
+    this.router.navigateByUrl("/admin/addCoach");
   }
 }

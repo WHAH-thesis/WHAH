@@ -1,230 +1,328 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class HttpService {
   constructor(private http: HttpClient) {}
-  ROOT_URL = "http://localhost:3000";
+  ROOT_URL = 'http://localhost:3000';
 
+  //////////////// sign up /////////////////////
   registerCompanies(data) {
-    return this.http.post(this.ROOT_URL + "/addCompany", data);
+    return this.http.post(this.ROOT_URL + '/addCompany', data);
   }
   registerTC(data) {
-    return this.http.post(this.ROOT_URL + "/addTC", data);
+    return this.http.post(this.ROOT_URL + '/addTC', data);
   }
   register(data) {
-    return this.http.post(this.ROOT_URL + "/addStudents", data);
+    return this.http.post(this.ROOT_URL + '/addStudents', data);
   }
-  loginStudent(data) {
-    return this.http.post(this.ROOT_URL + "/login", data);
+  //////////////// LOG IN /////////////////////////
+  loginStudent(obj) {
+    return this.http.post(this.ROOT_URL + '/login', obj);
+  }
+  getStudentsName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/studentsName', obj);
   }
   loginCompanies(data) {
-    return this.http.post(this.ROOT_URL + "/loginCompanies", data);
+    return this.http.post(this.ROOT_URL + '/loginCompanies', data);
   }
-  loginTC(data) {
-    return this.http.post(this.ROOT_URL + "/loginTC", data);
+  getCompaniesName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/companyName', obj);
   }
 
+  loginTC(data) {
+    return this.http.post(this.ROOT_URL + '/loginTC', data);
+  }
+  // getTc name after logIN
+  getTcName(obj) {
+    return this.http.post(this.ROOT_URL + '/users/tcName', obj);
+  }
+  ///////////// REGISTER ///////////////////////
   httpRegister(obj) {
-    console.log("this si inside ====>", obj);
     return this.http.post(this.ROOT_URL + `/api/users/registration`, obj);
   }
   httpRegisterCompany(obj) {
-    console.log("this si inside ====>", obj);
     return this.http.post(this.ROOT_URL + `/api/users/registerCompany`, obj);
   }
   httpRegisterTrainingCenter(obj) {
-    console.log("this si inside ====>", obj);
     return this.http.post(
       this.ROOT_URL + `/api/users/registerTrainingCenter`,
       obj
     );
   }
-
+  ////////////////// SEND VERIFICATION REQUESR //////////////////
   httpSendVerificationRequest(name) {
     return this.http.post(
-      this.ROOT_URL + "/api/users/sendVerificationRequest",
+      this.ROOT_URL + '/api/users/sendVerificationRequest',
       name
     );
   }
 
   httpSendVerificationRequestCompany(name) {
     return this.http.post(
-      this.ROOT_URL + "/api/users/sendVerificationRequestCompany",
+      this.ROOT_URL + '/api/users/sendVerificationRequestCompany',
       name
     );
   }
 
   httpSendVerificationRequestCenter(name) {
     return this.http.post(
-      this.ROOT_URL + "/api/users/sendVerificationRequestCenter",
+      this.ROOT_URL + '/api/users/sendVerificationRequestCenter',
       name
     );
   }
-
+  /////////////////// GET NON VERIFIED /////////////////////
   httpGetNonVerifiedStudents() {
-    return this.http.get(this.ROOT_URL + "/api/users/getNonVerifiedStudents");
+    return this.http.get(this.ROOT_URL + '/api/users/getNonVerifiedStudents');
   }
 
   httpGetNonVerifiedCompanies() {
-    return this.http.get(this.ROOT_URL + "/api/users/getNonVerifiedCompanies");
+    return this.http.get(this.ROOT_URL + '/api/users/getNonVerifiedCompanies');
   }
 
   httpGetNonVerifiedCenters() {
-    return this.http.get(this.ROOT_URL + "/api/users/getNonVerifiedCenters");
+    return this.http.get(this.ROOT_URL + '/api/users/getNonVerifiedCenters');
   }
-
+  //////////// VERIFY OR REJECT USER /////////////////////
   httpVerifyStudent(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/verifyStudent", name);
+    return this.http.post(this.ROOT_URL + '/api/users/verifyStudent', name);
   }
   httprejectStudent(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/rejectStudent", name);
+    return this.http.post(this.ROOT_URL + '/api/users/rejectStudent', name);
   }
   httpVerifyCompanies(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/verifyCompanies", name);
+    return this.http.post(this.ROOT_URL + '/api/users/verifyCompanies', name);
   }
   httprejectCompanies(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/rejectCompanies", name);
+    return this.http.post(this.ROOT_URL + '/api/users/rejectCompanies', name);
   }
-
   httpVerifyCenter(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/verifyCenter", name);
+    return this.http.post(this.ROOT_URL + '/api/users/verifyCenter', name);
   }
   httprejectCenter(name) {
-    return this.http.post(this.ROOT_URL + "/api/users/rejectCenter", name);
+    return this.http.post(this.ROOT_URL + '/api/users/rejectCenter', name);
   }
-
+  ///////////////////// GET SATATE OF USERS /////////////////////
   httpgetUserState(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/getUsersatate", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/getUsersatate', obj);
   }
 
   httpgetCompanyState(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/getCompanysatate", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/getCompanysatate', obj);
   }
 
   httpgetCenterState(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/getCentersatate", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/getCentersatate', obj);
   }
+  ///////////////////// GET PROFILS ///////////////////////////
   userProfil(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/studentToken", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/studentToken', obj);
   }
   compantProfil(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/companyToken", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/companyToken', obj);
   }
   tcProfil(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/TcToken", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/TcToken', obj);
   }
+  // Upload iamge
   uploadImg(img) {
-    console.log("IMG HTTP SERVICE==> ", img);
-    return this.http.post(this.ROOT_URL + "/upload", img);
+    return this.http.post(this.ROOT_URL + '/upload', img);
   }
-  updateData(obj){
-    return this.http.post(this.ROOT_URL  + '/api/users/Update' , obj)
+  // upldate profile
+  updateData(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/Update', obj);
   }
-  findProfil(str){
-    return this.http.post(this.ROOT_URL  + '/api/users/findProfil' , str)
+  // find profile by name
+  findProfil(str) {
+    return this.http.post(this.ROOT_URL + '/api/users/findProfil', str);
   }
-  updateCompanyData(obj){
-    return this.http.post(this.ROOT_URL  + '/api/company/Update' , obj)
+  // update profile
+  updateCompanyData(obj) {
+    return this.http.post(this.ROOT_URL + '/api/company/Update', obj);
   }
+  // GET ALL POSTS
   httpGetPosts() {
-    return this.http.get(this.ROOT_URL + "/api/posts");
+    return this.http.get(this.ROOT_URL + '/api/posts');
   }
+  // ADD POST BY CENTER
   httpAddPostCenter(obj) {
-    return this.http.post(this.ROOT_URL + "/api/posts/addPost", obj);
+    return this.http.post(this.ROOT_URL + '/api/posts/addPost', obj);
   }
+  /// DELETE POST
   httpdeletePost(obj) {
-    console.log(obj)
-    return this.http.post(this.ROOT_URL + "/api/posts/delete", obj);
+    return this.http.post(this.ROOT_URL + '/api/posts/delete', obj);
   }
-  updateTCData(obj){
-    return this.http.post(this.ROOT_URL  + '/api/center/update' , obj)
+  // UPDATE PROFILE
+  updateTCData(obj) {
+    return this.http.post(this.ROOT_URL + '/api/center/update', obj);
   }
-  savePosts(obj){
-    return this.http.post(this.ROOT_URL  + '/api/addPosts' , obj)
-
+  // ADD POST
+  savePosts(obj) {
+    return this.http.post(this.ROOT_URL + '/api/addPosts', obj);
   }
-
+  // DELETE TRAINING CENTER POST
   httpdeletePostTc(obj) {
-    console.log(obj)
-    return this.http.post(this.ROOT_URL + "/api/posts/deleteTc", obj);
+    return this.http.post(this.ROOT_URL + '/api/posts/deleteTc', obj);
   }
+  //////////////////////// GET ALL USERS //////////////////////
   httpGetStudents() {
-    return this.http.get(this.ROOT_URL + "/api/students");
+    return this.http.get(this.ROOT_URL + '/api/students');
   }
   httpGetCompanies() {
-    return this.http.get(this.ROOT_URL + "/api/companies");
+    return this.http.get(this.ROOT_URL + '/api/companies');
   }
   httpGetTrainingCenter() {
-    return this.http.get(this.ROOT_URL + "/api/trainingCenters");
+    return this.http.get(this.ROOT_URL + '/api/trainingCenters');
   }
-
+  /////////////////////////////// BAN USERS /////////////////////////////////
   httpbanstudent(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/ban/student", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/ban/student', obj);
   }
   httpbancompany(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/ban/company", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/ban/company', obj);
   }
   httpbancenter(obj) {
-    return this.http.post(this.ROOT_URL + "/api/users/ban/training", obj);
+    return this.http.post(this.ROOT_URL + '/api/users/ban/training', obj);
   }
   //find own company posts
-  findCompanyPosts(obj){
-    return this.http.post(this.ROOT_URL  + '/api/sreachByOwner' , obj)
+  findCompanyPosts(obj) {
+    return this.http.post(this.ROOT_URL + '/api/sreachByOwner', obj);
   }
   //delete posts inside company profile using owner
-  deleteCompanyPosts(obj){
-    return this.http.post(this.ROOT_URL  + '/api/rmCompanyPosts' , obj)
+  deleteCompanyPosts(obj) {
+    return this.http.post(this.ROOT_URL + '/api/rmCompanyPosts', obj);
   }
   //update posts from company profile
-  updateCompanyPosts(obj){
-    return this.http.post(this.ROOT_URL  + '/api/upCompanyPosts' , obj)
+  updateCompanyPosts(obj) {
+    return this.http.post(this.ROOT_URL + '/api/upCompanyPosts', obj);
   }
-  httpgetTcPosts(obj){
-    return this.http.post(this.ROOT_URL  + '/api/users/postsTc' , obj)
+  //// GET TRAINING CENTERS POSTS
+  httpgetTcPosts(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/postsTc', obj);
   }
-  update(array){
-    return this.http.post(this.ROOT_URL+'/api/update',array);
+  /// UPDATE
+  update(array) {
+    return this.http.post(this.ROOT_URL + '/api/update', array);
   }
   //update company posts by id before modify
-  postsToModify(obj){
-    return this.http.post(this.ROOT_URL  + '/api/upCompanyPost' , obj)
-  } 
-  applystudent(obj){
-    return this.http.post(this.ROOT_URL+'/api/student/apply',obj);
+  postsToModify(obj) {
+    return this.http.post(this.ROOT_URL + '/api/upCompanyPost', obj);
   }
-  httpGetApplications(obj){
-    return this.http.post(this.ROOT_URL+'/api/getNotification' , obj)
+  //// APPLY FOR A POST
+  applystudent(obj) {
+    return this.http.post(this.ROOT_URL + '/api/student/apply', obj);
   }
-  httpacceptApp(obj){
-    return this.http.post(this.ROOT_URL+'/api/acceptapply',obj);
+  // GET ALL APPLICATIONS
+  httpGetApplications(obj) {
+    return this.http.post(this.ROOT_URL + '/api/getNotification', obj);
   }
-  httpdeleteApplication(obj){
-    return this.http.post(this.ROOT_URL  + '/api/deleteApply' , obj)
+  //// ACCEPT APPLICATION OF STUDENT
+  httpacceptApp(obj) {
+    return this.http.post(this.ROOT_URL + '/api/acceptapply', obj);
   }
-
-  getNumberOfPostavailble(obj){
-    return this.http.post(this.ROOT_URL  + '/api/users/numberOfPosts' , obj)
-  } 
-
+  // REJECT APPLICATION
+  httpdeleteApplication(obj) {
+    return this.http.post(this.ROOT_URL + '/api/deleteApply', obj);
+  }
+  //////// NUMBER OF POSTS AVAILBLE FOR TRAINING CENTER ////////////////
+  getNumberOfPostavailble(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/numberOfPosts', obj);
+  }
+  //////////////// UPDATE NUMBER OF POSTS ///////////////
   httpUpdateSilver() {
-    return this.http.get(this.ROOT_URL + "/api/posts/weeklyPosts/siver");
+    return this.http.get(this.ROOT_URL + '/api/posts/weeklyPosts/siver');
   }
   httpUpdateGold() {
-    return this.http.get(this.ROOT_URL + "/api/posts/weeklyPosts/gold");
+    return this.http.get(this.ROOT_URL + '/api/posts/weeklyPosts/gold');
   }
   httpUpdatePlat() {
-    return this.http.get(this.ROOT_URL + "/api/posts/weeklyPosts/plat");
+    return this.http.get(this.ROOT_URL + '/api/posts/weeklyPosts/plat');
   }
-  
-  upgreadToPlat(obj){
-    return this.http.post(this.ROOT_URL  + '/api/users/PlatMembership' , obj)
-  } 
-  upgreadToGold(obj){
-    return this.http.post(this.ROOT_URL  + '/api/users/GoldMembership' , obj)
-  } 
+  ////////////////////// UPGRADE TRAINING CENTER MEMBERSHIP /////////
+  upgreadToPlat(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/PlatMembership', obj);
+  }
+  upgreadToGold(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/GoldMembership', obj);
+  }
+  //////////////////// handle the users report to admin //////////////////
+  //save users report to db and get
+  usersReport(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/Reports', obj);
+  }
+  getUsersReport() {
+    return this.http.get(this.ROOT_URL + '/api/admin/getReports');
+  }
+  deleteReports(obj) {
+    return this.http.post(this.ROOT_URL + '/api/admin/delReports', obj);
+  }
+  deleteAllReports() {
+    return this.http.delete(this.ROOT_URL + '/api/admin/delAllReports');
+  }
+  ////////////////////////// sending the reports //////////////////
+  reportPost(obj) {
+    return this.http.post(this.ROOT_URL + '/api/report', obj);
+  }
+  ////////////////////////Admin side for receiving the reports /////////////////
+  getReports() {
+    return this.http.get(this.ROOT_URL + '/api/adminReports');
+  }
+  //////////////////////////// Add coach ////////////
+  addCoach(obj) {
+    return this.http.post(this.ROOT_URL + '/api/addCoach', obj);
+  }
+  ////////////////////////// GET ALL Coaches /////////////////////////////////
+  getCoaches() {
+    return this.http.get(this.ROOT_URL + '/api/users/coach');
+  }
+  //////////////////////////// Add tree ////////////
+  addTree(obj) {
+    return this.http.post(this.ROOT_URL + '/api/addTree', obj);
+  }
+  ////////////////////////// GET ALL trees /////////////////////////////////
+  getTrees() {
+    return this.http.get(this.ROOT_URL + '/api/users/trees');
+  }
 
+  //////////////////////////// Add path ////////////
+  addPath(obj) {
+    return this.http.post(this.ROOT_URL + '/api/addPath', obj);
+  }
+  ////////////////////////// GET ALL paths /////////////////////////////////
+  getPaths() {
+    return this.http.get(this.ROOT_URL + '/api/users/paths');
+  }
+  //////////////////////////// get relations ////////////
+  getJoin(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/relation', obj);
+  }
+  //////////////////////////// Add relation ////////////
+  addrelation(obj) {
+    return this.http.post(this.ROOT_URL + '/api/addRelation', obj);
+  }
+
+  getPathByName(obj) {
+    return this.http.post(this.ROOT_URL + '/api/users/onePaths', obj);
+  }
+
+  //////////////////////////// Add comment ////////////
+  addcomment(obj) {
+    return this.http.post(this.ROOT_URL + '/users/addComment', obj);
+  }
+  //////////////////////////// Add comment ////////////
+  getcomment(obj) {
+    return this.http.post(this.ROOT_URL + '/users/getComment', obj);
+  }
+  //check username in singUp students
+  checkExistingNames(obj) {
+    return this.http.post(this.ROOT_URL + '/users/checkExistingNames', obj);
+  }
+  checkuserNames(obj) {
+    return this.http.post(this.ROOT_URL + '/users/checkNames', obj);
+  }
+  socialLogin(obj) {
+    return this.http.post(this.ROOT_URL + '/users/userSocialData', obj);
+  }
 }
-

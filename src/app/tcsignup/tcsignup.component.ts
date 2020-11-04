@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
 export class TcsignupComponent implements OnInit {
   constructor(private _http: HttpService, private router: Router) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+  // redirect to sign in
   signin() {
     this.router.navigateByUrl('/signin/center');
   }
-  
-  addTC(name, password) {
-    var obj = { name, password };
+  // sign up Training center
+  addTC(name, password ,email) {
+    var obj = { name, password ,email};
     this._http.registerTC(obj).subscribe((data) => {
       this.router.navigateByUrl('/signin/center');
     });
